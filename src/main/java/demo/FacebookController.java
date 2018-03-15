@@ -1,4 +1,4 @@
-package hello;
+package demo;
 
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
