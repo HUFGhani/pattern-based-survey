@@ -30,7 +30,7 @@ public class FacebookController {
         model.addAttribute("facebookProfile", facebook.userOperations().getUserProfile());
         PagedList<Post> feed = facebook.feedOperations().getFeed();
         model.addAttribute("feed", feed);
-        return "helloFB";
+        return "facebook";
     }
 
 }
