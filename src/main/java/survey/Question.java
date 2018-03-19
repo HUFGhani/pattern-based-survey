@@ -1,8 +1,11 @@
 package survey;
 
 import java.util.List;
+import java.util.Map;
 
 public abstract class Question {
+
+    int id;
 
     public abstract int getId();
 
@@ -12,7 +15,7 @@ public abstract class Question {
 
     public abstract void setQuestion(String question);
 
-    public abstract List<String> getAnswers();
+    public abstract Answer getAnswer();
 
     public abstract void setAnswers(List<String> answers);
 
