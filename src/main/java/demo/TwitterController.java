@@ -21,6 +21,7 @@ public class TwitterController {
 
     @RequestMapping(value = "{hashTag}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Tweet> getTweets(@PathVariable final String hashTag) {
+
         return twitter.searchOperations().search(hashTag, 20).getTweets();
     }
 }
