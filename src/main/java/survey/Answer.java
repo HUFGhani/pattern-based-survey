@@ -1,8 +1,16 @@
 package survey;
 
-public abstract class Answer {
+public class Answer {
 
-    public abstract Object getAnswer();
+    private String answer;
+
+    public String getAnswer(){
+        return this.answer;
+    }
+
+    public void setAnswer(String answer){
+        this.answer = answer;
+    }
 
 
 }

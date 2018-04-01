@@ -5,19 +5,17 @@ import java.util.Map;
 
 public abstract class Question {
 
-    int id;
-
     public abstract int getId();
 
     public abstract void setId(int id);
 
-    public abstract String getQuestion();
+    public abstract String getQuestionText();
 
-    public abstract void setQuestion(String question);
+    public abstract void setQuestionText(String questionText);
 
     public abstract Answer getAnswer();
 
-    public abstract void setAnswers(List<String> answers);
+    public abstract void setAnswer(Answer answer);
 
 
 }
