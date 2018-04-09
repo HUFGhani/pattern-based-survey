@@ -8,6 +8,7 @@ import tk.plogitech.darksky.forecast.model.Forecast;
 import tk.plogitech.darksky.forecast.model.Latitude;
 import tk.plogitech.darksky.forecast.model.Longitude;
 
+
 @Service
 public class DarkSkyApiService {
 
@@ -20,7 +21,10 @@ public class DarkSkyApiService {
         try {
             ForecastRequest request = new ForecastRequestBuilder()
                     .key(new APIKey(apiKey))
-                    .location(new GeoCoordinates(new Longitude(lat), new Latitude(lon))).build();
+                    .location(new GeoCoordinates(new Longitude(lat), new Latitude(lon)))
+                    .units(ForecastRequestBuilder.Units.us)
+                    .language(ForecastRequestBuilder.Language.en)
+                    .build();
 
             DarkSkyJacksonClient client = new DarkSkyJacksonClient();
             return client.forecast(request);
