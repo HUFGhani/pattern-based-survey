@@ -21,7 +21,7 @@ public class DarkSkyApiService {
         try {
             ForecastRequest request = new ForecastRequestBuilder()
                     .key(new APIKey(apiKey))
-                    .location(new GeoCoordinates(new Longitude(lat), new Latitude(lon)))
+                    .location(new GeoCoordinates(new Longitude(lon), new Latitude(lat)))
                     .units(ForecastRequestBuilder.Units.us)
                     .language(ForecastRequestBuilder.Language.en)
                     .build();
