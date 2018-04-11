@@ -1,12 +1,13 @@
 package darksky;
 
+import javassist.compiler.ast.StringL;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.social.twitter.api.Twitter;
-import org.springframework.social.twitter.api.Tweet;
+import org.springframework.social.twitter.api.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.http.MediaType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //Call with ../get-tweets/%23some-hashtag
@@ -29,6 +30,58 @@ public class TwitterController {
 
     @GetMapping("/list")
     public List<Tweet> list() {
-        return twitter.searchOperations().search("trump").getTweets();
+
+        List<Tweet> list = twitter.searchOperations().search("trump", 10).getTweets();
+
+        for (Tweet tweet : list) {
+            tweet.getText();
+        }
+        return list;
+    }
+
+    @GetMapping("/text")
+    public ArrayList<String> listString(){
+
+        List<Tweet> list = twitter.searchOperations().search("trump", 10).getTweets();
+        ArrayList<String> stringList = new ArrayList<String>();
+
+        for (Tweet tweet : list) {
+            stringList.add(tweet.getText());
+        }
+
+        return stringList;
+    }
+
+    @GetMapping("/popular-tweets")
+    public List<Tweet> popularTweets() {
+
+        SearchResults results = twitter.searchOperations().search(
+                new SearchParameters("#manutd")
+                        //.geoCode(new GeoCode(52.379241, 4.900846, 100, GeoCode.Unit.MILE))
+                        .lang("en")
+                        .resultType(SearchParameters.ResultType.POPULAR)
+                        .count(10)
+                        .includeEntities(false));
+
+        List<Tweet> tweets = results.getTweets();
+
+        return tweets;
+    }
+
+    @GetMapping("/popular-trends")
+    public ArrayList<String> popularTrends() {
+
+        List<Trend> trends = twitter
+                .searchOperations()
+                .getLocalTrends(23424975, false) //UK's "where-on-earth" (WOE) ID   //true excludes hashtagged trends
+                .getTrends();
+
+        ArrayList<String> list = new ArrayList<>();
+
+        for (int i = 0; i < 10; i++) {
+            list.add(trends.get(i).getName());
+        }
+
+        return list;
     }
 }
