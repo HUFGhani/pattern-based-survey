@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Boot Thymeleaf Hello World Example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+
+</head>
+<body>
+
+<form method="POST">
+<th:block th:each="question : ${questions}">
+    <p th:text="${question.questionText}"></p>
+    <input type="text" name="answer"/>
+    <input type="submit"/>
+</th:block>
+</form>
+</body>
+</html>

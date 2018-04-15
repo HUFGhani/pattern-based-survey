@@ -2,10 +2,15 @@ package darksky;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import tk.plogitech.darksky.forecast.DarkSkyClient;
-import tk.plogitech.darksky.forecast.model.Forecast;
+import survey.Question;
+import survey.QuestionFactory;
+import survey.Section;
+import survey.Survey;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -56,4 +61,6 @@ public class TestController {
 
         return tempRovaniemi + " " + tempManchester + " " + tempDomingo + "<br>" + time + " " + timezone;
     }
+
+
 }
