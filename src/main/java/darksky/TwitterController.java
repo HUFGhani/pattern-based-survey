@@ -3,16 +3,20 @@ package darksky;
 import javassist.compiler.ast.StringL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.twitter.api.*;
+import org.springframework.social.twitter.api.impl.TwitterTemplate;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.http.MediaType;
+import com.google.gson.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
 //Call with ../get-tweets/%23some-hashtag
-@RestController
-
+@Controller
 @RequestMapping(TwitterController.TWITTER_BASE_URI)
 public class TwitterController {
 
@@ -21,6 +25,13 @@ public class TwitterController {
     @Autowired
     private Twitter twitter;
 
+    String consumerKey = "t91pumPTu0khIGHqVnX2LbEde";
+    String consumerSecret = "UHB8jDL9YlU4v1uA3H1n4MxgG8iPHTt3DHDK90qzU8cuNTxPqU";
+    String accessToken = "781795963874738176-qo8NNhYiq5pJpl87ts90Xsuod0Y1iPm";
+    String accessTokenSecret = "uW40W9XHElKd1YCQFTSHvN5yEYXd2BTiE6uAwFFWzZYs7";
+    Twitter twitter2 = new TwitterTemplate(consumerKey, consumerSecret, accessToken, accessTokenSecret);
+
+
     @ResponseBody
     @RequestMapping(value = "{hashTag}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Tweet> getTweets(@PathVariable final String hashTag) {
@@ -28,6 +39,7 @@ public class TwitterController {
         return twitter.searchOperations().search(hashTag, 10).getTweets();
     }
 
+    @ResponseBody
     @GetMapping("/list")
     public List<Tweet> list() {
 
@@ -39,6 +51,7 @@ public class TwitterController {
         return list;
     }
 
+    @ResponseBody
     @GetMapping("/text")
     public ArrayList<String> listString(){
 
@@ -52,12 +65,12 @@ public class TwitterController {
         return stringList;
     }
 
+    @ResponseBody
     @GetMapping("/popular-tweets")
     public List<Tweet> popularTweets() {
 
         SearchResults results = twitter.searchOperations().search(
                 new SearchParameters("#manutd")
-                        //.geoCode(new GeoCode(52.379241, 4.900846, 100, GeoCode.Unit.MILE))
                         .lang("en")
                         .resultType(SearchParameters.ResultType.POPULAR)
                         .count(10)
@@ -68,6 +81,7 @@ public class TwitterController {
         return tweets;
     }
 
+    @ResponseBody
     @GetMapping("/popular-trends")
     public ArrayList<String> popularTrends() {
 
@@ -85,13 +99,14 @@ public class TwitterController {
         return list;
     }
 
-    @GetMapping("/random")
     @ResponseBody
+    @GetMapping("/random")
     public String RandomTweet(){
 
         String hashtag = getRandomTrend();
-        return getTweetFromHashtag(hashtag);
+        return getTweetFromHashtag(hashtag) + "<br><br>" + getTweetFromTimeline() + "<br><br>" + getRandomTweetURL();
     }
+
 
     public String getRandomTrend(){
         List<Trend> hashtags = twitter
@@ -104,16 +119,54 @@ public class TwitterController {
         return rndHashtag;
     }
 
+
     public String getTweetFromHashtag(String hashtag) {
-        Tweet tweet = twitter.searchOperations().search(
+
+        List<Tweet> tweetList = twitter.searchOperations().search(
                 new SearchParameters(hashtag)
-                        //.geoCode(new GeoCode(52.379241, 4.900846, 100, GeoCode.Unit.MILE))
                         .lang("en")
                         .resultType(SearchParameters.ResultType.POPULAR)
                         .count(1)
-                        .includeEntities(false))
-                .getTweets().get(0);
+                        .includeEntities(true)
+                )
+                .getTweets();
 
-        return tweet.getText();
+        Tweet tweet  = tweetList.get(0);
+
+        return tweet.getUser().getScreenName() + ": " + tweet.getText() + " " +  "\"<br>" + "Created on: " + tweet.getCreatedAt()
+                + "source: " + tweet.getSource() + " ID: " + tweet.getId();
     }
+
+    public Tweet getRandomTweetFromHashtag(String hashtag) {
+        List<Tweet> tweetList = twitter.searchOperations().search(
+                new SearchParameters(hashtag)
+                        .lang("en")
+                        .resultType(SearchParameters.ResultType.POPULAR)
+                        .count(1)
+                        .includeEntities(true)
+                ).getTweets();
+
+        return tweetList.get(0);
+    }
+
+    //Returns a URL like https://twitter.com/{profile name}/status/{twitter id}
+    public String getRandomTweetURL() {
+
+        String hashtag = getRandomTrend();
+        Tweet tweet = getRandomTweetFromHashtag(hashtag);
+
+        return tweet.getUser().getProfileUrl() + "/status/" + tweet.getId();
+    }
+
+    public String getTweetFromTimeline() {
+        return twitter2.timelineOperations().getHomeTimeline().get((int) (Math.random() * 10)).getText();
+    }
+
+    @RequestMapping("/embed")
+    public String showEmbeddedTweet() {
+
+        return "embed";
+    }
+
+
 }
