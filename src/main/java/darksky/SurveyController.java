@@ -1,6 +1,8 @@
 package darksky;
 
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -96,6 +98,13 @@ public class SurveyController {
 
     public boolean isEndOfSurvey(Survey survey,int currentSection){
         return currentSection >= survey.getSections().size()-1;
+    }
+
+    @RequestMapping("/results")
+    public ResponseEntity<Survey> results(HttpServletRequest request){
+        Survey survey = (Survey) request.getSession().getAttribute("survey");
+        return new ResponseEntity(survey,HttpStatus.OK);
+
     }
 
 
