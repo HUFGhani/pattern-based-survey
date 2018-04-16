@@ -13,4 +13,13 @@ public class Survey {
     public List<Section> getSections() {
         return sections;
     }
+
+    public Section getSectionById(int id){
+        for(Section section : sections){
+            if(section.getId()==id){
+                return section;
+            }
+        }
+        return null;
+    }
 }
