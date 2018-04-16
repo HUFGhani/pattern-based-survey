@@ -21,12 +21,12 @@ public class SurveyController {
 
 
     @RequestMapping("/survey")
-    public String testSurvey(Model model, HttpServletRequest request){
+    public String showSurvey(Model model, HttpServletRequest request){
+        int currentSection = 0;
         Survey survey = getSurvey();
-        model.addAttribute("questions",survey.getSectionById(0).getQuestions());
-
+        model.addAttribute("questions",survey.getSectionById(currentSection).getQuestions());
+        model.addAttribute("sectionId",survey.getSectionById(currentSection).getId());
         request.getSession().setAttribute("survey",survey);
-        request.getSession().setAttribute("currentSection",0);
         return "survey";
     }
 
@@ -73,8 +73,9 @@ public class SurveyController {
     @PostMapping("/survey")
     public String testSurvey(@RequestParam Map<String,String> answers, Model model, HttpServletRequest request){
         HttpSession session = request.getSession();
-        int currentSection = (Integer) session.getAttribute("currentSection");
         Survey survey = (Survey) session.getAttribute("survey");
+        int currentSection = Integer.parseInt(answers.get("sectionId"));
+        answers.remove("sectionId");
 
         answers.forEach((id,answer)->survey.getSections()
                         .get(currentSection)
@@ -83,7 +84,7 @@ public class SurveyController {
 
         if(!isEndOfSurvey(survey,currentSection)) {
             session.setAttribute("survey", survey);
-            session.setAttribute("currentSection", currentSection + 1);
+            model.addAttribute("sectionId", currentSection + 1);
             model.addAttribute("questions", survey.getSectionById(currentSection + 1).getQuestions());
         }else{
             saveSurvey(survey);

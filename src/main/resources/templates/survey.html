@@ -12,6 +12,7 @@
 <body>
 
 <form method="POST">
+    <input type="hidden" name="sectionId" th:value="${sectionId}"/>
 <th:block th:each="question : ${questions}">
     <p th:text="${question.questionText}"></p>
     <th:block th:switch="${question.class.name}">
