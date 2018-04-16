@@ -71,24 +71,21 @@ public class SurveyController {
     }
 
     @PostMapping("/survey")
-    public String testSurvey(@RequestParam Map<String,String> params, Model model, HttpServletRequest request){
+    public String testSurvey(@RequestParam Map<String,String> answers, Model model, HttpServletRequest request){
         HttpSession session = request.getSession();
         int currentSection = (Integer) session.getAttribute("currentSection");
         Survey survey = (Survey) session.getAttribute("survey");
 
-        params.entrySet()
-                .forEach(s->survey.getSections()
+        answers.forEach((id,answer)->survey.getSections()
                         .get(currentSection)
-                        .getQuestionById(Integer.parseInt(s.getKey()))
-                        .setAnswer(new Answer(s.getValue())));
+                        .getQuestionById(Integer.parseInt(id))
+                        .setAnswer(new Answer(answer)));
 
         if(!isEndOfSurvey(survey,currentSection)) {
             session.setAttribute("survey", survey);
             session.setAttribute("currentSection", currentSection + 1);
             model.addAttribute("questions", survey.getSectionById(currentSection + 1).getQuestions());
-            System.out.println("Not ended");
         }else{
-            System.out.println("ended");
             saveSurvey(survey);
             return showEndPage();
         }
@@ -113,6 +110,8 @@ public class SurveyController {
 
     @RequestMapping("/results")
     public ResponseEntity<Survey> results(HttpServletRequest request){
+        //TODO: This doesn't have to be here by the end, just added for easy access to example of JSON results.
+        //TODO:Remove button for results in "endpage.html" as well.
         Survey survey = (Survey) request.getSession().getAttribute("survey");
         return new ResponseEntity(survey,HttpStatus.OK);
 
