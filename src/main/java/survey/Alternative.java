@@ -6,6 +6,11 @@ public class Alternative {
     private int id;
     private String alternativeText;
 
+    public Alternative(int id, String alternativeText) {
+        this.id = id;
+        this.alternativeText = alternativeText;
+    }
+
     public int getId() {
         return id;
     }
