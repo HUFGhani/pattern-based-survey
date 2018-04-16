@@ -84,4 +84,36 @@ public class TwitterController {
 
         return list;
     }
+
+    @GetMapping("/random")
+    @ResponseBody
+    public String RandomTweet(){
+
+        String hashtag = getRandomTrend();
+        return getTweetFromHashtag(hashtag);
+    }
+
+    public String getRandomTrend(){
+        List<Trend> hashtags = twitter
+                .searchOperations()
+                .getLocalTrends(23424975, false) //UK's "where-on-earth" (WOE) ID   //true excludes hashtagged trends
+                .getTrends();
+
+        String rndHashtag = hashtags.get((int) (Math.random() * 10)).getName();
+
+        return rndHashtag;
+    }
+
+    public String getTweetFromHashtag(String hashtag) {
+        Tweet tweet = twitter.searchOperations().search(
+                new SearchParameters(hashtag)
+                        //.geoCode(new GeoCode(52.379241, 4.900846, 100, GeoCode.Unit.MILE))
+                        .lang("en")
+                        .resultType(SearchParameters.ResultType.POPULAR)
+                        .count(1)
+                        .includeEntities(false))
+                .getTweets().get(0);
+
+        return tweet.getText();
+    }
 }
