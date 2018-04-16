@@ -22,7 +22,16 @@ public class SurveyController {
 
     @RequestMapping("/survey")
     public String testSurvey(Model model, HttpServletRequest request){
+        Survey survey = getSurvey();
+        model.addAttribute("questions",survey.getSectionById(0).getQuestions());
 
+        request.getSession().setAttribute("survey",survey);
+        request.getSession().setAttribute("currentSection",0);
+        return "survey";
+    }
+
+    public Survey getSurvey(){
+        //TODO: Remove static survey implementation and add real survey from JSON file
 
         List<Question> questions = new ArrayList<>();
         QuestionFactory qf = new QuestionFactory();
@@ -48,7 +57,7 @@ public class SurveyController {
 
         List<Question> questions2 = new ArrayList<>();
         Question q4 = qf.getQuestion("matrix",3,"How does this survey make you feel two?",null,7);
-        Question q5 = qf.getQuestion("text",3,"More questions?",null,0);
+        Question q5 = qf.getQuestion("text",4,"More questions?",null,0);
 
 
         questions2.add(q4);
@@ -58,12 +67,7 @@ public class SurveyController {
 
         Survey survey = new Survey();
         survey.setSections(sections);
-
-        model.addAttribute("questions",survey.getSectionById(0).getQuestions());
-
-        request.getSession().setAttribute("survey",survey);
-        request.getSession().setAttribute("currentSection",0);
-        return "survey";
+        return survey;
     }
 
     @PostMapping("/survey")
@@ -84,19 +88,26 @@ public class SurveyController {
             model.addAttribute("questions", survey.getSectionById(currentSection + 1).getQuestions());
             System.out.println("Not ended");
         }else{
-            //TODO:Save survey and return to end page
             System.out.println("ended");
+            saveSurvey(survey);
             return showEndPage();
         }
 
         return "survey";
     }
 
-    public String showEndPage(){
+    private String showEndPage(){
         return "endpage";
     }
 
-    public boolean isEndOfSurvey(Survey survey,int currentSection){
+    private void saveSurvey(Survey survey){
+        //TODO: Implement saving of survey.
+        //TODO: Probably move this to another class?
+    }
+
+
+    private boolean isEndOfSurvey(Survey survey,int currentSection){
+        //TODO: Move this to somewhere, does not belong in controller?
         return currentSection >= survey.getSections().size()-1;
     }
 
