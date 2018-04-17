@@ -1,17 +1,10 @@
 package darksky;
 
-import javassist.compiler.ast.StringL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.twitter.api.*;
-import org.springframework.social.twitter.api.impl.TwitterTemplate;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.http.MediaType;
-import com.google.gson.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,13 +17,6 @@ public class TwitterController {
 
     @Autowired
     private Twitter twitter;
-
-    String consumerKey = "t91pumPTu0khIGHqVnX2LbEde";
-    String consumerSecret = "UHB8jDL9YlU4v1uA3H1n4MxgG8iPHTt3DHDK90qzU8cuNTxPqU";
-    String accessToken = "781795963874738176-qo8NNhYiq5pJpl87ts90Xsuod0Y1iPm";
-    String accessTokenSecret = "uW40W9XHElKd1YCQFTSHvN5yEYXd2BTiE6uAwFFWzZYs7";
-    Twitter twitter2 = new TwitterTemplate(consumerKey, consumerSecret, accessToken, accessTokenSecret);
-
 
     @ResponseBody
     @RequestMapping(value = "{hashTag}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -104,7 +90,7 @@ public class TwitterController {
     public String RandomTweet(){
 
         String hashtag = getRandomTrend();
-        return getTweetFromHashtag(hashtag) + "<br><br>" + getTweetFromTimeline() + "<br><br>" + getRandomTweetURL();
+        return getTweetFromHashtag(hashtag) + "<br><br>" + getRandomTweetURL();
     }
 
 
@@ -158,15 +144,10 @@ public class TwitterController {
         return tweet.getUser().getProfileUrl() + "/status/" + tweet.getId();
     }
 
-    public String getTweetFromTimeline() {
-        return twitter2.timelineOperations().getHomeTimeline().get((int) (Math.random() * 10)).getText();
-    }
-
     @RequestMapping("/embed")
     public String showEmbeddedTweet() {
 
         return "embed";
     }
-
 
 }
