@@ -1,6 +1,8 @@
 package darksky;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import savesurvery.SurveryWriterCaretaker;
+import savesurvery.SurveryWriterUtil;
 import survey.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -87,7 +91,7 @@ public class SurveyController {
             model.addAttribute("sectionId", currentSection + 1);
             model.addAttribute("questions", survey.getSectionById(currentSection + 1).getQuestions());
         }else{
-            saveSurvey(survey);
+            saveSurvey(survey,request);
             return showEndPage();
         }
 
@@ -98,9 +102,24 @@ public class SurveyController {
         return "endpage";
     }
 
-    private void saveSurvey(Survey survey){
+    private void saveSurvey(Survey survey,HttpServletRequest request){
         //TODO: Implement saving of survey.
         //TODO: Probably move this to another class?
+        ObjectMapper mapper = new ObjectMapper();
+        Survey s = survey;
+        String jsonInString = null;
+
+        try {
+           jsonInString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(s);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        SurveryWriterCaretaker caretaker = new SurveryWriterCaretaker();
+        SurveryWriterUtil fileWriter = new SurveryWriterUtil("survey/"+request.getSession().getId()+".json");
+        fileWriter.write(jsonInString);
+        System.out.println(fileWriter);
+        caretaker.save(fileWriter);
     }
 
 
