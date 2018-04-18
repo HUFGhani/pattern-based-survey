@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Test for embedded questions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+
+<div class="col-md-12">
+    <h4>How does this Tweet makes you feel?</h4>
+    <div id="tweet-div"></div>
+</div>
+
+<div id="weather-div" class="col-md-12">
+    <iframe id="forecast_embed" frameborder="0" height="245" width="60%"
+            src="//forecast.io/embed/#lat=53.46&amp;lon=2.22&amp;name=Manchester&amp;units=uk&amp;color=#00aaff"></iframe>
+</div>
+
+<script type="text/javascript" src="/webjars/jquery/3.3.1/jquery.js"/>
+<script>
+
+    var url = "//forecast.io/embed/#lat=53.46&amp;lon=2.22&amp;name=Manchester&amp;units=uk";
+
+    $("#forecast_embed").src = url;
+
+    $(document).ready(function() {
+        var url = "https://twitter.com/LeaveEUOfficial/status/985821756496728065"
+        $.ajax({
+            url: "https://publish.twitter.com/oembed?url=" + url,
+            dataType: "jsonp",
+            success: function (data) {
+                $("#tweet-div").html(data.html);
+            }
+        })
+
+        // var lat = 53.46;
+        // var lon = -2.22;
+        // var displayName = "Manchester";
+        //
+        // var url = "//forecast.io/embed/#lat=53.46&amp;lon=2.22&amp;name=Manchester&amp;units=uk";
+        // var url = "//forecast.io/embed/#lat=" + lat + "&amp;lon=" + lon + "&amp;name=" + displayName + "&amp;units=uk";
+        //
+        // $("#forecast_embed").attr('src', url);
+    })
+</script>
+
+</body>
+</html>
