@@ -1,6 +1,7 @@
 package darksky;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -12,13 +13,16 @@ import survey.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class SurveyController {
 
+    @Autowired
+    private TwitterApiService twitterApiService;
+
+    @Autowired
+    private DarkSkyApiService darkSkyApiService;
 
     @RequestMapping("/survey")
     public String showSurvey(Model model, HttpServletRequest request){
@@ -35,7 +39,7 @@ public class SurveyController {
 
         List<Question> questions = new ArrayList<>();
         QuestionFactory qf = new QuestionFactory();
-        Question q1 = qf.getQuestion("text", 0, "What question?",null,0);
+        Question q1 = qf.getQuestion("text", 0, "What question?",null,0, null);
         questions.add(q1);
 
 
@@ -44,10 +48,11 @@ public class SurveyController {
         List<Alternative> alternatives = new ArrayList<>();
         alternatives.add(alt1);
         alternatives.add(alt2);
-        Question q2 = qf.getQuestion("mcq",1,"Which alternative?",alternatives,0);
+        Question q2 = qf.getQuestion("mcq",1,"Which alternative?",alternatives,0, null);
         questions.add(q2);
 
-        Question q3 = qf.getQuestion("matrix",2,"How does this survey make you feel?",null,7);
+        Question q3 = qf.getQuestion("matrix",2,"How does this survey make you feel?",null,
+                7, null);
         questions.add(q3);
 
         List<Section> sections = new ArrayList<>();
@@ -56,14 +61,32 @@ public class SurveyController {
 
 
         List<Question> questions2 = new ArrayList<>();
-        Question q4 = qf.getQuestion("matrix",3,"How does this survey make you feel two?",null,7);
-        Question q5 = qf.getQuestion("text",4,"More questions?",null,0);
+        Question q4 = qf.getQuestion("matrix",3,"How does this survey make you feel two?",
+                null,7, null);
+        Question q5 = qf.getQuestion("text",4,"More questions?",null,0, null);
 
 
         questions2.add(q4);
         questions2.add(q5);
         Section s2 = new Section(1,questions2);
         sections.add(s2);
+
+        EmbedQuestionAdapter adapter = Calendar.getInstance().getTimeInMillis() % 2 == 0 ?
+                new EmbedQuestionAdapterTwitter(twitterApiService) : new EmbedQuestionAdapterWeather(darkSkyApiService);
+
+        //EmbedQuestionAdapter adapter = new EmbedQuestionAdapterTwitter();
+        Alternative alt3 = new Alternative(1,"First alternative");
+        Alternative alt4 = new Alternative(2,"Second alternative");
+        List<Alternative> alternatives2 = new ArrayList<>();
+        alternatives2.add(alt3);
+        alternatives2.add(alt4);
+        List<Question> questions3 = new ArrayList<>();
+        Question q6 = qf.getQuestion("embed", 5, "How does this content make you feel?",
+                alternatives2, 0, adapter.getEmbedLink());
+
+        questions3.add(q6);
+        Section s3 = new Section(2, questions3);
+        sections.add(s3);
 
         Survey survey = new Survey();
         survey.setSections(sections);
@@ -117,7 +140,5 @@ public class SurveyController {
         return new ResponseEntity(survey,HttpStatus.OK);
 
     }
-
-
 
 }
