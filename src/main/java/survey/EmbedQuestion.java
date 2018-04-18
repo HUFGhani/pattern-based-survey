@@ -10,6 +10,14 @@ public class EmbedQuestion extends Question {
     private String embedLink;
     private Answer answer;
 
+    public EmbedQuestion( int id, String questionText, List<Alternative> alternatives, String embedLink) {
+        this.alternatives = alternatives;
+        this.id = id;
+        this.questionText = questionText;
+        this.embedLink = embedLink;
+        this.answer = answer;
+    }
+
     public List<Alternative> getAlternatives() {
         return alternatives;
     }
@@ -26,41 +34,33 @@ public class EmbedQuestion extends Question {
         this.embedLink = embedLink;
     }
 
-    public EmbedQuestion(List<Alternative> alternatives, int id, String questionText, String embedLink, Answer answer) {
-        this.alternatives = alternatives;
-        this.id = id;
-        this.questionText = questionText;
-        this.embedLink = embedLink;
-        this.answer = answer;
-    }
-
     @Override
     public int getId() {
-        return 0;
+        return id;
     }
 
     @Override
     public void setId(int id) {
-
+        this.id = id;
     }
 
     @Override
     public String getQuestionText() {
-        return null;
+        return questionText;
     }
 
     @Override
     public void setQuestionText(String questionText) {
-
+        this.questionText = questionText;
     }
 
     @Override
     public Answer getAnswer() {
-        return null;
+        return answer;
     }
 
     @Override
     public void setAnswer(Answer answer) {
-
+        this.answer = answer;
     }
 }
