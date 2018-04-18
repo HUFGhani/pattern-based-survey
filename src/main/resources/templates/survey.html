@@ -23,7 +23,7 @@
                     </h3>
 
                     <th:block th:switch="${question.class.name}">
-                        <div th:case="'survey.McQuestion'">
+                        <div th:case="'man.survey.McQuestion'">
                             <div th:each="alternative : ${ question.alternatives}">
                                 <label>
                                     <input type="radio" th:name="${question.id}" th:value="${alternative.id}"/>
@@ -31,7 +31,7 @@
                                 </label>
                             </div>
                         </div>
-                        <div th:case="'survey.MatrixQuestion'">
+                        <div th:case="'man.survey.MatrixQuestion'">
                             <table>
                                 <tr>
                                     <th:block th:each="i: ${#numbers.sequence(1, question.scale)}">
@@ -45,7 +45,7 @@
                                 </tr>
                             </table>
                         </div>
-                        <div th:case="'survey.TextQuestion'">
+                        <div th:case="'man.survey.TextQuestion'">
                             <input type="text" th:name="${question.id}"/>
                         </div>
                     </th:block>

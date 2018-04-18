@@ -1,27 +1,16 @@
-package survey;
+package man.survey;
 
-import java.util.List;
-import java.util.Map;
+public class TextQuestion extends Question {
 
-public class MatrixQuestion extends Question{
-
-    int scale;
     private int id;
     private String questionText;
     private Answer answer;
 
-    public MatrixQuestion(int id, int scale, String questionText) {
-        this.scale = scale;
+    public TextQuestion(){}
+
+    public TextQuestion(int id, String questionText) {
         this.id = id;
         this.questionText = questionText;
-    }
-
-    public int getScale() {
-        return scale;
-    }
-
-    public void setScale(int scale) {
-        this.scale = scale;
     }
 
     @Override
@@ -53,6 +42,5 @@ public class MatrixQuestion extends Question{
     public void setAnswer(Answer answer) {
         this.answer = answer;
     }
-
 
 }

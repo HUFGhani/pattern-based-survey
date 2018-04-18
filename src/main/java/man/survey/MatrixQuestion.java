@@ -1,28 +1,26 @@
-package survey;
+package man.survey;
 
-import java.util.List;
-import java.util.Map;
+public class MatrixQuestion extends Question{
 
-public class McQuestion extends Question {
-
-    private List<Alternative> alternatives;
+    int scale;
     private int id;
     private String questionText;
     private Answer answer;
 
+    public MatrixQuestion(){}
 
-    public McQuestion(int id, List<Alternative> alternatives, String questionText) {
+    public MatrixQuestion(int id, int scale, String questionText) {
+        this.scale = scale;
         this.id = id;
-        this.alternatives = alternatives;
         this.questionText = questionText;
     }
 
-    public List<Alternative> getAlternatives() {
-        return alternatives;
+    public int getScale() {
+        return scale;
     }
 
-    public void setAlternatives(List<Alternative> alternatives) {
-        this.alternatives = alternatives;
+    public void setScale(int scale) {
+        this.scale = scale;
     }
 
     @Override
@@ -54,4 +52,6 @@ public class McQuestion extends Question {
     public void setAnswer(Answer answer) {
         this.answer = answer;
     }
+
+
 }

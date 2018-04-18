@@ -1,6 +1,8 @@
-package darksky;
+package man.darksky;
 
 
+import man.config.ConfigurationProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -8,78 +10,50 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import survey.*;
+import man.survey.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
 public class SurveyController {
 
+    SurveyFactory surveyFactory;
+    ConfigurationProperties configurationProperties;
+
+    @Autowired
+    public SurveyController (SurveyFactory surveyFactory, ConfigurationProperties configurationProperties){
+        this.configurationProperties = configurationProperties;
+        this.surveyFactory = surveyFactory;
+    }
 
     @RequestMapping("/survey")
-    public String showSurvey(Model model, HttpServletRequest request){
+    public String showSurvey(Model model, HttpServletRequest request,
+                             @RequestParam(value = "surveyName", required = false) String surveyName){
         int currentSection = 0;
-        Survey survey = getSurvey();
+        if(surveyName == null){
+            surveyName=configurationProperties.getDefaultSurveyName();
+        }
+        Survey survey = surveyFactory.getSurvey(surveyName);
         model.addAttribute("questions",survey.getSectionById(currentSection).getQuestions());
         model.addAttribute("sectionId",survey.getSectionById(currentSection).getId());
         request.getSession().setAttribute("survey",survey);
         return "survey";
     }
 
-    public Survey getSurvey(){
-        //TODO: Remove static survey implementation and add real survey from JSON file
-
-        List<Question> questions = new ArrayList<>();
-        QuestionFactory qf = new QuestionFactory();
-        Question q1 = qf.getQuestion("text", 0, "What question?",null,0);
-        questions.add(q1);
-
-
-        Alternative alt1 = new Alternative(1,"First alternative");
-        Alternative alt2 = new Alternative(2,"Second alternative");
-        List<Alternative> alternatives = new ArrayList<>();
-        alternatives.add(alt1);
-        alternatives.add(alt2);
-        Question q2 = qf.getQuestion("mcq",1,"Which alternative?",alternatives,0);
-        questions.add(q2);
-
-        Question q3 = qf.getQuestion("matrix",2,"How does this survey make you feel?",null,7);
-        questions.add(q3);
-
-        List<Section> sections = new ArrayList<>();
-        Section s1 = new Section(0,questions);
-        sections.add(s1);
-
-
-        List<Question> questions2 = new ArrayList<>();
-        Question q4 = qf.getQuestion("matrix",3,"How does this survey make you feel two?",null,7);
-        Question q5 = qf.getQuestion("text",4,"More questions?",null,0);
-
-
-        questions2.add(q4);
-        questions2.add(q5);
-        Section s2 = new Section(1,questions2);
-        sections.add(s2);
-
-        Survey survey = new Survey();
-        survey.setSections(sections);
-        return survey;
-    }
 
     @PostMapping("/survey")
-    public String testSurvey(@RequestParam Map<String,String> answers, Model model, HttpServletRequest request){
+    public String testSurvey(@RequestParam Map<String,String> params, Model model, HttpServletRequest request){
         HttpSession session = request.getSession();
         Survey survey = (Survey) session.getAttribute("survey");
-        int currentSection = Integer.parseInt(answers.get("sectionId"));
-        answers.remove("sectionId");
-
+        int currentSection = Integer.parseInt(params.get("sectionId"));
+        HashMap<Integer,String> answers = new HashMap<>();
+        survey.getSectionById(currentSection).getQuestions().stream().forEach(q->answers.put(q.getId(),params.get((Integer.toString(q.getId())))));
         answers.forEach((id,answer)->survey.getSections()
                         .get(currentSection)
-                        .getQuestionById(Integer.parseInt(id))
+                        .getQuestionById(id)
                         .setAnswer(new Answer(answer)));
 
         if(!isEndOfSurvey(survey,currentSection)) {
@@ -99,7 +73,7 @@ public class SurveyController {
     }
 
     private void saveSurvey(Survey survey){
-        //TODO: Implement saving of survey.
+        //TODO: Implement saving of man.survey.
         //TODO: Probably move this to another class?
     }
 

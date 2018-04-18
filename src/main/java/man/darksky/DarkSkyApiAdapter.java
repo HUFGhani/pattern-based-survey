@@ -1,6 +1,7 @@
-package darksky;
+package man.darksky;
 
-import org.springframework.beans.factory.annotation.Value;
+import man.config.ConfigurationProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.plogitech.darksky.api.jackson.DarkSkyJacksonClient;
 import tk.plogitech.darksky.forecast.*;
@@ -10,19 +11,19 @@ import tk.plogitech.darksky.forecast.model.Longitude;
 
 
 @Service
-public class DarkSkyApiService {
+public class DarkSkyApiAdapter {
 
-    @Value("${api.key.darksky}")
-    String apiKey;
+    ConfigurationProperties configurationProperties;
 
-    public DarkSkyApiService(){}
+    @Autowired
+    public DarkSkyApiAdapter(ConfigurationProperties configurationProperties){this.configurationProperties = configurationProperties;}
 
     public Forecast getForecast(double lat, double lon){
         try {
             ForecastRequest request = new ForecastRequestBuilder()
-                    .key(new APIKey(apiKey))
+                    .key(new APIKey(configurationProperties.getDarkSkyApiKey()))
                     .location(new GeoCoordinates(new Longitude(lon), new Latitude(lat)))
-                    .units(ForecastRequestBuilder.Units.us)
+                    .units(ForecastRequestBuilder.Units.auto)
                     .language(ForecastRequestBuilder.Language.en)
                     .build();
 
