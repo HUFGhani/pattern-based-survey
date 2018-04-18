@@ -1,4 +1,4 @@
-package temperatureAdapter;
+package man.temperatureAdapter;
 
 public interface TemperatureAdapter {
 

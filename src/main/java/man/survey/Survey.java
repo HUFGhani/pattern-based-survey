@@ -1,10 +1,21 @@
-package survey;
+package man.survey;
 
 import java.util.List;
 
 public class Survey {
 
+    private String name;
     private List<Section> sections;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Survey(){}
 
     public void setSections(List<Section> sections) {
         this.sections = sections;

@@ -1,4 +1,4 @@
-package darksky;
+package man.darksky;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.twitter.api.*;

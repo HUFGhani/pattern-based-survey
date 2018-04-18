@@ -1,4 +1,4 @@
-package survey;
+package man.survey;
 
 import java.util.List;
 
@@ -11,6 +11,8 @@ public class Section {
         this.id = id;
         this.questions = questions;
     }
+
+    public Section() {}
 
     public List<Question> getQuestions() {
         return questions;

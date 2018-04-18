@@ -1,5 +1,4 @@
-package survey;
-
+package man.survey;
 
 public class Alternative {
 
@@ -10,6 +9,8 @@ public class Alternative {
         this.id = id;
         this.alternativeText = alternativeText;
     }
+
+    public Alternative() {}
 
     public int getId() {
         return id;
