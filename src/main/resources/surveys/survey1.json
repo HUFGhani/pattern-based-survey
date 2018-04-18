@@ -1,0 +1,58 @@
+{
+  "name": "survey1",
+  "sections": [
+    {
+      "id": 0,
+      "questions": [
+        {
+          "@type": "TextQuestion",
+          "id": 0,
+          "questionText": "What question?"
+        },
+        {
+          "@type": "McQuestion",
+          "alternatives": [
+            {
+              "id": 1,
+              "alternativeText": "First alternative"
+            },
+            {
+              "id": 2,
+              "alternativeText": "Second alternative"
+            }
+          ],
+          "id": 1,
+          "questionText": "Which alternative?"
+        },
+        {
+          "@type": "MatrixQuestion",
+          "scale": 7,
+          "id": 2,
+          "questionText": "How does this survey make you feel?"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "questions": [
+        {
+          "@type": "MatrixQuestion",
+          "scale": 7,
+          "id": 3,
+          "questionText": "How does this survey make you feel two?",
+          "answer": {
+            "answer": "4"
+          }
+        },
+        {
+          "@type": "TextQuestion",
+          "id": 4,
+          "questionText": "More questions?",
+          "answer": {
+            "answer": "1234"
+          }
+        }
+      ]
+    }
+  ]
+}

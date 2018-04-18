@@ -1,17 +1,28 @@
-package survey;
+package man.survey;
 
 import java.util.List;
-import java.util.Map;
 
-public class TextQuestion extends Question {
+public class McQuestion extends Question {
 
+    private List<Alternative> alternatives;
     private int id;
     private String questionText;
     private Answer answer;
 
-    public TextQuestion(int id, String questionText) {
+    public McQuestion(){}
+
+    public McQuestion(int id, List<Alternative> alternatives, String questionText) {
         this.id = id;
+        this.alternatives = alternatives;
         this.questionText = questionText;
+    }
+
+    public List<Alternative> getAlternatives() {
+        return alternatives;
+    }
+
+    public void setAlternatives(List<Alternative> alternatives) {
+        this.alternatives = alternatives;
     }
 
     @Override
@@ -43,5 +54,4 @@ public class TextQuestion extends Question {
     public void setAnswer(Answer answer) {
         this.answer = answer;
     }
-
 }

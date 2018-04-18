@@ -1,8 +1,10 @@
-package survey;
+package man.survey;
 
 public class Answer {
 
     private String answer;
+
+    public Answer(){}
 
     public String getAnswer(){
         return this.answer;

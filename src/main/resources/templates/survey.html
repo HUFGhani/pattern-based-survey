@@ -2,49 +2,64 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Spring Boot Thymeleaf Hello World Example</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <link rel="stylesheet" type="text/css"
-          href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+          href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
-    <div class="col-md-10">
-        <form method="POST">
-            <input type="hidden" name="sectionId" th:value="${sectionId}"/>
+
+<div class="col-md-10">
+    <form method="POST">
+        <input type="hidden" name="sectionId" th:value="${sectionId}"/>
+
+        <ul class="list-group">
             <th:block th:each="question : ${questions}">
-                <p th:text="${question.questionText}"></p>
-                <th:block th:switch="${question.class.name}">
-                    <div th:case="'survey.McQuestion'">
-                        <div th:each="alternative : ${ question.alternatives}">
-                            <label>
-                                <input type="radio" th:name="${question.id}" th:value="${alternative.id}"/>
-                                <span th:text="${alternative.alternativeText}"></span>
-                            </label>
+                <li class="list-group-item">
+                    <h3>
+                        <p th:text="${question.questionText}"></p>
+                    </h3>
+
+                    <th:block th:switch="${question.class.name}">
+                        <div th:case="'man.survey.McQuestion'">
+                            <div th:each="alternative : ${ question.alternatives}">
+                                <label>
+                                    <input type="radio" th:name="${question.id}" th:value="${alternative.id}"/>
+                                    <span th:text="${alternative.alternativeText}"></span>
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                    <div th:case="'survey.MatrixQuestion'">
-                        <table>
-                            <tr>
-                                <th:block th:each="i: ${#numbers.sequence(1, question.scale)}">
-                                    <th th:text="${i}"/>
-                                </th:block>
-                            </tr>
-                            <tr>
-                                <th:block th:each="i: ${#numbers.sequence(1, question.scale)}">
-                                    <td><input type="radio" th:name="${question.id}" th:value="${i}"/>&emsp;</td>
-                                </th:block>
-                            </tr>
-                        </table>
-                    </div>
-                    <div th:case="'survey.TextQuestion'">
-                        <input type="text" th:name="${question.id}"/>
-                    </div>
-                </th:block>
+                        <div th:case="'man.survey.MatrixQuestion'">
+                            <table>
+                                <tr>
+                                    <th:block th:each="i: ${#numbers.sequence(1, question.scale)}">
+                                        <th th:text="${i}"/>
+                                    </th:block>
+                                </tr>
+                                <tr>
+                                    <th:block th:each="i: ${#numbers.sequence(1, question.scale)}">
+                                        <td><input type="radio" th:name="${question.id}" th:value="${i}"/>&emsp;</td>
+                                    </th:block>
+                                </tr>
+                            </table>
+                        </div>
+                        <div th:case="'man.survey.TextQuestion'">
+                            <input type="text" th:name="${question.id}"/>
+                        </div>
+                    </th:block>
+                </li>
 
             </th:block>
-            <input type="submit"/>
-        </form>
-    </div>
+        </ul>
+
+
+        <input class="btn btn-primary" type="submit" value="Submit"/>
+
+
+    </form>
+</div>
 
 <script type="text/javascript" src="/webjars/jquery/3.3.1/jquery.js"></script>
 

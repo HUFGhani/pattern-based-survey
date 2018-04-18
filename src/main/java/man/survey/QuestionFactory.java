@@ -1,4 +1,4 @@
-package survey;
+package man.survey;
 
 import java.util.List;
 
