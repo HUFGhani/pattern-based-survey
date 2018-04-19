@@ -5,6 +5,7 @@ import man.config.ConfigurationProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.social.twitter.api.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +15,9 @@ import man.survey.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -22,6 +25,14 @@ public class SurveyController {
 
     SurveyFactory surveyFactory;
     ConfigurationProperties configurationProperties;
+
+    //TwitterApiAdapter twitterApiAdapter;
+
+    @Autowired
+    private Twitter twitter;
+
+    @Autowired
+    private DarkSkyApiAdapter darkSkyApiService;
 
     @Autowired
     public SurveyController (SurveyFactory surveyFactory, ConfigurationProperties configurationProperties){
@@ -37,6 +48,15 @@ public class SurveyController {
             surveyName=configurationProperties.getDefaultSurveyName();
         }
         Survey survey = surveyFactory.getSurvey(surveyName);
+
+        EmbedQuestionAdapter adapter = Calendar.getInstance().getTimeInMillis() % 2 == 0 ?
+                new EmbedQuestionAdapterTwitter(twitter) : new EmbedQuestionAdapterWeather(darkSkyApiService);
+
+        for (Section s : survey.getSections())
+            for (Question q: s.getQuestions())
+                if (q instanceof EmbedQuestion)
+                    ((EmbedQuestion) q).setEmbedLink(adapter.getEmbedLink());
+        
         model.addAttribute("questions",survey.getSectionById(currentSection).getQuestions());
         model.addAttribute("sectionId",survey.getSectionById(currentSection).getId());
         request.getSession().setAttribute("survey",survey);

@@ -20,14 +20,20 @@ public class ConfigurationProperties {
     @Value("${survey.default.name}")
     String defaultSurveyName;
 
+    @Value("${spring.social.twitter.app-id}")
+    String twitterKey;
+
+    @Value("${spring.social.twitter.app-secret}")
+    String twitterSecret;
+
     public String getDefaultSurveyName() {return defaultSurveyName;}
 
     public String getDarkSkyApiKey() {return darkSkyApiKey;}
 
     public String getSurveyFolder() {return surveyFolderName;}
 
+    public String getTwitterKey() {return twitterKey;}
 
-
-
+    public String getTwitterSecret() {return twitterSecret;}
 
 }
