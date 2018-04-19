@@ -4,8 +4,7 @@
     <title>Spring Boot Thymeleaf Hello World Example</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <link rel="stylesheet" type="text/css"
-          href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
@@ -48,16 +47,30 @@
                         <div th:case="'man.survey.TextQuestion'">
                             <input type="text" th:name="${question.id}"/>
                         </div>
+                        
+                        <div th:case="'man.survey.EmbedQuestion'">
+                          <h4 th:utext="${question.embedLink}"></h4>
+                          <table>
+                              <tr>
+                                  <th:block th:each="i: ${#numbers.sequence(1, question.scale)}">
+                                      <th th:text="${i}"/>
+                                  </th:block>
+                              </tr>
+                              <tr>
+                                  <th:block th:each="i: ${#numbers.sequence(1, question.scale)}">
+                                      <td><input type="radio" th:name="${question.id}" th:value="${i}"/>&emsp;</td>
+                                  </th:block>
+                              </tr>
+                          </table>
+                        </div>
                     </th:block>
                 </li>
 
             </th:block>
         </ul>
 
-
+        <br/>
         <input class="btn btn-primary" type="submit" value="Submit"/>
-
-
     </form>
 </div>
 

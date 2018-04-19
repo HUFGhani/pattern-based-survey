@@ -51,6 +51,13 @@
           "answer": {
             "answer": "1234"
           }
+        },
+        {
+          "@type": "EmbedQuestion",
+          "id": 5,
+          "scale": 7,
+          "questionText": "How does this content make you feel?",
+          "embedLink": "*pretend there's some nice embedded content right here*"
         }
       ]
     }

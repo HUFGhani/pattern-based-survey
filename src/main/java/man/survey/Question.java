@@ -7,7 +7,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonSubTypes({
         @JsonSubTypes.Type(value = McQuestion.class, name = "McQuestion"),
         @JsonSubTypes.Type(value = MatrixQuestion.class, name = "MatrixQuestion"),
-        @JsonSubTypes.Type(value = TextQuestion.class, name = "TextQuestion") }
+        @JsonSubTypes.Type(value = TextQuestion.class, name = "TextQuestion"),
+        @JsonSubTypes.Type(value = EmbedQuestion.class, name = "EmbedQuestion")}
 )
 public abstract class Question {
 
