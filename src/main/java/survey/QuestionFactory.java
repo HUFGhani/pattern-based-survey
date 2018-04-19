@@ -20,7 +20,7 @@ public class QuestionFactory {
 
         } else if (questionType == "embed") {
 
-            return new EmbedQuestion(id, questionText, alternatives, embedLink);
+            return new EmbedQuestion(id, scale, questionText, embedLink);
         }
 
         return null;

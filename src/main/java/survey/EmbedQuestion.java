@@ -4,26 +4,26 @@ import java.util.List;
 
 public class EmbedQuestion extends Question {
 
-    private List<Alternative> alternatives;
     private int id;
     private String questionText;
     private String embedLink;
     private Answer answer;
+    private int scale;
 
-    public EmbedQuestion( int id, String questionText, List<Alternative> alternatives, String embedLink) {
-        this.alternatives = alternatives;
+    public EmbedQuestion( int id, int scale, String questionText, String embedLink) {
         this.id = id;
         this.questionText = questionText;
         this.embedLink = embedLink;
         this.answer = answer;
+        this.scale = scale;
     }
 
-    public List<Alternative> getAlternatives() {
-        return alternatives;
+    public int getScale() {
+        return scale;
     }
 
-    public void setAlternatives(List<Alternative> alternatives) {
-        this.alternatives = alternatives;
+    public void setScale(int scale) {
+        this.scale = scale;
     }
 
     public String getEmbedLink() {

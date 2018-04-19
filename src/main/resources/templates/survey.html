@@ -13,7 +13,7 @@
         <input type="hidden" name="sectionId" th:value="${sectionId}"/>
         <th:block th:each="question : ${questions}">
 
-            <p th:text="${question.questionText}"></p>
+            <h4 th:text="${question.questionText}"></h4>
             <th:block th:switch="${question.class.name}">
 
                 <div th:case="'survey.McQuestion'">
@@ -45,18 +45,31 @@
                 </div>
 
                 <div th:case="'survey.EmbedQuestion'">
-                    <span th:utext="${question.embedLink}"></span>
-                    <div th:each="alternative : ${ question.alternatives}">
+                    <h4 th:utext="${question.embedLink}"></h4>
+                   <!-- <div th:each="alternative : ${ question.alternatives}">
                         <label>
                             <input type="radio" th:name="${question.id}" th:value="${alternative.id}"/>
                             <span th:text="${alternative.alternativeText}"></span>
                         </label>
-                    </div>
+                    </div>-->
+
+                    <table>
+                        <tr>
+                            <th:block th:each="i: ${#numbers.sequence(1, question.scale)}">
+                                <th th:text="${i}"/>
+                            </th:block>
+                        </tr>
+                        <tr>
+                            <th:block th:each="i: ${#numbers.sequence(1, question.scale)}">
+                                <td><input type="radio" th:name="${question.id}" th:value="${i}"/>&emsp;</td>
+                            </th:block>
+                        </tr>
+                    </table>
                 </div>
             </th:block>
-
         </th:block>
-        <input type="submit"/>
+        <br/>
+        <input type="submit" class="btn btn-primary"/>
     </form>
 </div>
 
