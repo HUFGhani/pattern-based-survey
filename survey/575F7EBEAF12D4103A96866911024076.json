@@ -1,0 +1,48 @@
+{
+  "sections" : [ {
+    "id" : 0,
+    "questions" : [ {
+      "id" : 0,
+      "questionText" : "What question?",
+      "answer" : {
+        "answer" : "s"
+      }
+    }, {
+      "alternatives" : [ {
+        "id" : 1,
+        "alternativeText" : "First alternative"
+      }, {
+        "id" : 2,
+        "alternativeText" : "Second alternative"
+      } ],
+      "id" : 1,
+      "questionText" : "Which alternative?",
+      "answer" : {
+        "answer" : "1"
+      }
+    }, {
+      "scale" : 7,
+      "id" : 2,
+      "questionText" : "How does this survey make you feel?",
+      "answer" : {
+        "answer" : "7"
+      }
+    } ]
+  }, {
+    "id" : 1,
+    "questions" : [ {
+      "scale" : 7,
+      "id" : 3,
+      "questionText" : "How does this survey make you feel two?",
+      "answer" : {
+        "answer" : "7"
+      }
+    }, {
+      "id" : 4,
+      "questionText" : "More questions?",
+      "answer" : {
+        "answer" : "s"
+      }
+    } ]
+  } ]
+}

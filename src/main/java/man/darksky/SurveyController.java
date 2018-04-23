@@ -1,23 +1,26 @@
 package man.darksky;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import man.config.ConfigurationProperties;
+import man.survey.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.social.twitter.api.*;
+import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import man.survey.*;
+import savesurvery.SurveryWriterCaretaker;
+import savesurvery.SurveryWriterUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -81,7 +84,7 @@ public class SurveyController {
             model.addAttribute("sectionId", currentSection + 1);
             model.addAttribute("questions", survey.getSectionById(currentSection + 1).getQuestions());
         }else{
-            saveSurvey(survey);
+            saveSurvey(survey,request);
             return showEndPage();
         }
 
@@ -92,9 +95,25 @@ public class SurveyController {
         return "endpage";
     }
 
-    private void saveSurvey(Survey survey){
-        //TODO: Implement saving of man.survey.
+    private void saveSurvey(Survey survey,HttpServletRequest request){
+        //TODO: Implement saving of survey.
+
         //TODO: Probably move this to another class?
+        ObjectMapper mapper = new ObjectMapper();
+        Survey s = survey;
+        String jsonInString = null;
+
+        try {
+           jsonInString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(s);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        SurveryWriterCaretaker caretaker = new SurveryWriterCaretaker();
+        SurveryWriterUtil fileWriter = new SurveryWriterUtil("survey/"+request.getSession().getId()+".json");
+        fileWriter.write(jsonInString);
+        System.out.println(fileWriter);
+        caretaker.save(fileWriter);
     }
 
 
