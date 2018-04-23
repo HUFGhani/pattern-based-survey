@@ -1,10 +1,8 @@
 package man.survey;
 
-import man.config.ConfigurationProperties;
 import man.darksky.DarkSkyApiAdapter;
 
 public class EmbedQuestionAdapterWeather implements EmbedQuestionAdapter {
-
 
     DarkSkyApiAdapter darkSkyApiAdapter;
 
@@ -20,7 +18,7 @@ public class EmbedQuestionAdapterWeather implements EmbedQuestionAdapter {
     public String getEmbedLink() {
 
         //TODO: change this to include darksky Api
-        //System.out.println(darkSkyApiService.getForecast(lat, lon).getCurrently().getTemperature() + "");
+        //darkSkyApiAdapter.getForecast(lat, lon).get
 
         String embedWeather = "<iframe id=\"forecast_embed\" frameborder=\"0\" height=\"245\" width=\"60%\"\n" +
                 "            src=\"//forecast.io/embed/#lat=" + lat + "&amp;lon=" + lon +

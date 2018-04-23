@@ -1,8 +1,6 @@
 package man.survey;
 
-import man.darksky.TwitterApiAdapter;
 import org.springframework.social.twitter.api.*;
-
 import java.util.List;
 
 public class EmbedQuestionAdapterTwitter implements EmbedQuestionAdapter {
@@ -20,8 +18,6 @@ public class EmbedQuestionAdapterTwitter implements EmbedQuestionAdapter {
         Tweet tweet = getRandomTweetFromHashtag(trend);
 
         return getOembedLink(tweet);
-
-        //return "<h4>hey</h4>";
     }
 
     public String getRandomTrend(){
@@ -30,9 +26,9 @@ public class EmbedQuestionAdapterTwitter implements EmbedQuestionAdapter {
                 .getLocalTrends(23424975, false) //UK's "where-on-earth" (WOE) ID   //true excludes hashtagged trends
                 .getTrends();
 
-        String rndHashtag = hashtags.get((int) (Math.random() * 10)).getName();
+        String randomHashtag = hashtags.get((int) (Math.random() * 10)).getName();
 
-        return rndHashtag;
+        return randomHashtag;
     }
 
     public Tweet getRandomTweetFromHashtag(String hashtag) {
@@ -52,9 +48,6 @@ public class EmbedQuestionAdapterTwitter implements EmbedQuestionAdapter {
         OEmbedTweet oembed = twitter.timelineOperations().getStatusOEmbed(tweet.getIdStr(),
                 new OEmbedOptions()
                         .maxWidth(500)
-                        //.hideMedia()
-                        //.hideThread()
-                        //.omitScript()
                         .align("center")
                         .language("en"));
 
