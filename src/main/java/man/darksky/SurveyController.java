@@ -21,12 +21,6 @@ public class SurveyController {
     ConfigurationProperties configurationProperties;
 
     @Autowired
-    private Twitter twitter;
-
-    @Autowired
-    private DarkSkyApiAdapter darkSkyApiService;
-
-    @Autowired
     public SurveyController (SurveyFactory surveyFactory, ConfigurationProperties configurationProperties){
         this.configurationProperties = configurationProperties;
         this.surveyFactory = surveyFactory;
@@ -40,14 +34,6 @@ public class SurveyController {
             surveyName=configurationProperties.getDefaultSurveyName();
         }
         Survey survey = surveyFactory.getSurvey(surveyName);
-
-        EmbedQuestionAdapter adapter = Calendar.getInstance().getTimeInMillis() % 2 == 0 ?
-                new EmbedQuestionAdapterTwitter(twitter) : new EmbedQuestionAdapterWeather(darkSkyApiService); // Get random embedded content
-
-        for (Section s : survey.getSections()) // Invokes adapter to obtain a link for embedding Tweet/Weather content
-            for (Question q: s.getQuestions())
-                if (q instanceof EmbedQuestion)
-                    ((EmbedQuestion) q).setEmbedLink(adapter.getEmbedLink());
 
         model.addAttribute("questions",survey.getSectionById(currentSection).getQuestions());
         model.addAttribute("sectionId",survey.getSectionById(currentSection).getId());
