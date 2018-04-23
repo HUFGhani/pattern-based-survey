@@ -24,7 +24,7 @@
                         <div th:case="'man.survey.McQuestion'">
                             <div th:each="alternative : ${ question.alternatives}">
                                 <label>
-                                    <input type="radio" th:name="${question.id}" th:value="${alternative.id}"/>
+                                    <input required type="radio" th:name="${question.id}" th:value="${alternative.id}"/>
                                     <span th:utext="${alternative.alternativeText}"></span>
                                 </label>
                             </div>
@@ -38,13 +38,13 @@
                                 </tr>
                                 <tr>
                                     <th:block th:each="i: ${#numbers.sequence(1, question.scale)}">
-                                        <td><input type="radio" th:name="${question.id}" th:value="${i}"/>&emsp;</td>
+                                        <td><input required type="radio" th:name="${question.id}" th:value="${i}"/>&emsp;</td>
                                     </th:block>
                                 </tr>
                             </table>
                         </div>
                         <div th:case="'man.survey.TextQuestion'">
-                            <input type="text" th:name="${question.id}"/>
+                            <input required type="text" th:name="${question.id}"/>
                         </div>
                         
                         <div th:case="'man.survey.EmbedQuestion'">
@@ -57,7 +57,7 @@
                               </tr>
                               <tr>
                                   <th:block th:each="i: ${#numbers.sequence(1, question.scale)}">
-                                      <td><input type="radio" th:name="${question.id}" th:value="${i}"/>&emsp;</td>
+                                      <td><input required type="radio" th:name="${question.id}" th:value="${i}"/>&emsp;</td>
                                   </th:block>
                               </tr>
                           </table>

@@ -10,7 +10,6 @@ import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Singleton;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,8 +38,8 @@ public class SurveyFactory {
         if(survey==null){
             survey = getSurveyFromFile(surveyName);
 
-            EmbedQuestionAdapter adapter = Math.random() < 0.5 ?
-                    new EmbedQuestionAdapterTwitter(twitter) : new EmbedQuestionAdapterWeather(darkSkyApiService); // Get random embedded content
+            EmbedQuestionStrategy adapter = Math.random() < 0.5 ?
+                    new EmbedQuestionTwitterStrategy(twitter) : new EmbedQuestionWeatherStrategy(darkSkyApiService); // Get random embedded content
 
             for (Section s : survey.getSections()) // Invokes adapter to obtain a link for embedding Tweet/Weather content
                 for (Question q: s.getQuestions())
