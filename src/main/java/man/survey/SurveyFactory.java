@@ -3,7 +3,10 @@ package man.survey;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import man.config.ConfigurationProperties;
+import man.darksky.DarkSkyApiAdapter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Singleton;
@@ -15,6 +18,12 @@ import java.util.Map;
 public class SurveyFactory {
 
     ConfigurationProperties configurationProperties;
+
+    @Autowired
+    private Twitter twitter;
+
+    @Autowired
+    private DarkSkyApiAdapter darkSkyApiService;
 
     public SurveyFactory(ConfigurationProperties configurationProperties){
         this.configurationProperties = configurationProperties;
@@ -28,6 +37,15 @@ public class SurveyFactory {
 
         if(survey==null){
             survey = getSurveyFromFile(surveyName);
+
+            EmbedQuestionStrategy adapter = Math.random() < 0.5 ?
+                    new EmbedQuestionTwitterStrategy(twitter) : new EmbedQuestionWeatherStrategy(darkSkyApiService); // Get random embedded content
+
+            for (Section s : survey.getSections()) // Invokes adapter to obtain a link for embedding Tweet/Weather content
+                for (Question q: s.getQuestions())
+                    if (q instanceof EmbedQuestion)
+                        ((EmbedQuestion) q).setEmbedLink(adapter.getEmbedLink());
+
             surveys.put(surveyName,survey);
         }
         return survey;

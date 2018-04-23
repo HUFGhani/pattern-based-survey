@@ -2,7 +2,7 @@ package man.survey;
 
 import man.darksky.DarkSkyApiAdapter;
 
-public class EmbedQuestionAdapterWeather implements EmbedQuestionAdapter {
+public class EmbedQuestionWeatherStrategy implements EmbedQuestionStrategy {
 
     DarkSkyApiAdapter darkSkyApiAdapter;
 
@@ -10,7 +10,7 @@ public class EmbedQuestionAdapterWeather implements EmbedQuestionAdapter {
     double lon = -2.2243379;
     String displayName = "Manchester";
 
-    public EmbedQuestionAdapterWeather(DarkSkyApiAdapter darkSkyApiService) {
+    public EmbedQuestionWeatherStrategy(DarkSkyApiAdapter darkSkyApiService) {
         this.darkSkyApiAdapter = darkSkyApiService;
     }
 

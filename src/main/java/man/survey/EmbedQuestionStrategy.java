@@ -1,6 +1,6 @@
 package man.survey;
 
-public interface EmbedQuestionAdapter {
+public interface EmbedQuestionStrategy {
 
     public String getEmbedLink();
 }

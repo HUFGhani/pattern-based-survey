@@ -3,11 +3,11 @@ package man.survey;
 import org.springframework.social.twitter.api.*;
 import java.util.List;
 
-public class EmbedQuestionAdapterTwitter implements EmbedQuestionAdapter {
+public class EmbedQuestionTwitterStrategy implements EmbedQuestionStrategy {
 
     public Twitter twitter;
 
-    public EmbedQuestionAdapterTwitter(Twitter twitter){
+    public EmbedQuestionTwitterStrategy(Twitter twitter){
         this.twitter = twitter;
     }
 
