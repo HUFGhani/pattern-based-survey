@@ -2,31 +2,23 @@ package man.darksky;
 
 
 import man.config.ConfigurationProperties;
+import man.survey.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.social.twitter.api.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import man.survey.*;
-
+import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class SurveyController {
 
     SurveyFactory surveyFactory;
     ConfigurationProperties configurationProperties;
-
-    //TwitterApiAdapter twitterApiAdapter;
 
     @Autowired
     private Twitter twitter;
@@ -50,13 +42,13 @@ public class SurveyController {
         Survey survey = surveyFactory.getSurvey(surveyName);
 
         EmbedQuestionAdapter adapter = Calendar.getInstance().getTimeInMillis() % 2 == 0 ?
-                new EmbedQuestionAdapterTwitter(twitter) : new EmbedQuestionAdapterWeather(darkSkyApiService);
+                new EmbedQuestionAdapterTwitter(twitter) : new EmbedQuestionAdapterWeather(darkSkyApiService); // Get random embedded content
 
-        for (Section s : survey.getSections())
+        for (Section s : survey.getSections()) // Invokes adapter to obtain a link for embedding Tweet/Weather content
             for (Question q: s.getQuestions())
                 if (q instanceof EmbedQuestion)
                     ((EmbedQuestion) q).setEmbedLink(adapter.getEmbedLink());
-        
+
         model.addAttribute("questions",survey.getSectionById(currentSection).getQuestions());
         model.addAttribute("sectionId",survey.getSectionById(currentSection).getId());
         request.getSession().setAttribute("survey",survey);
@@ -66,21 +58,23 @@ public class SurveyController {
 
     @PostMapping("/survey")
     public String testSurvey(@RequestParam Map<String,String> params, Model model, HttpServletRequest request){
+
         HttpSession session = request.getSession();
         Survey survey = (Survey) session.getAttribute("survey");
         int currentSection = Integer.parseInt(params.get("sectionId"));
         HashMap<Integer,String> answers = new HashMap<>();
+
         survey.getSectionById(currentSection).getQuestions().stream().forEach(q->answers.put(q.getId(),params.get((Integer.toString(q.getId())))));
         answers.forEach((id,answer)->survey.getSections()
                         .get(currentSection)
                         .getQuestionById(id)
                         .setAnswer(new Answer(answer)));
 
-        if(!isEndOfSurvey(survey,currentSection)) {
+        if (!isEndOfSurvey(survey,currentSection)) {
             session.setAttribute("survey", survey);
             model.addAttribute("sectionId", currentSection + 1);
             model.addAttribute("questions", survey.getSectionById(currentSection + 1).getQuestions());
-        }else{
+        } else {
             saveSurvey(survey);
             return showEndPage();
         }
@@ -111,7 +105,5 @@ public class SurveyController {
         return new ResponseEntity(survey,HttpStatus.OK);
 
     }
-
-
 
 }

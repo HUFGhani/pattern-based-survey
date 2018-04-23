@@ -1,6 +1,5 @@
-package man.survey;
 
-import java.util.List;
+package man.survey;
 
 public class EmbedQuestion extends Question {
 
@@ -12,11 +11,10 @@ public class EmbedQuestion extends Question {
 
     public EmbedQuestion(){}
 
-    public EmbedQuestion( int id, int scale, String questionText, String embedLink) {
+    public EmbedQuestion(int id, int scale, String questionText, String embedLink) {
         this.id = id;
         this.questionText = questionText;
         this.embedLink = embedLink;
-        this.answer = answer;
         this.scale = scale;
     }
 

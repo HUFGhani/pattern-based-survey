@@ -5,7 +5,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -26,7 +25,7 @@
                             <div th:each="alternative : ${ question.alternatives}">
                                 <label>
                                     <input type="radio" th:name="${question.id}" th:value="${alternative.id}"/>
-                                    <span th:text="${alternative.alternativeText}"></span>
+                                    <span th:utext="${alternative.alternativeText}"></span>
                                 </label>
                             </div>
                         </div>
@@ -75,6 +74,7 @@
 </div>
 
 <script type="text/javascript" src="/webjars/jquery/3.3.1/jquery.js"></script>
+<script type="text/javascript" src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </body>
 </html>
