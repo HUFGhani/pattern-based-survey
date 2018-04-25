@@ -35,7 +35,7 @@ public class SurveyController {
         this.surveyFactory = surveyFactory;
     }
 
-    @RequestMapping("/survey")
+    @RequestMapping("/")
     public String showSurvey(Model model, HttpServletRequest request,
                              @RequestParam(value = "surveyName", required = false) String surveyName){
         int currentSection = 0;
@@ -51,7 +51,7 @@ public class SurveyController {
     }
 
 
-    @PostMapping("/survey")
+    @PostMapping("/")
     public String testSurvey(@RequestParam Map<String,String> params, Model model, HttpServletRequest request){
 
         HttpSession session = request.getSession();
