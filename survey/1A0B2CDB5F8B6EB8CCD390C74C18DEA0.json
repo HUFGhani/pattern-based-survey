@@ -1,0 +1,181 @@
+{
+  "name" : "survey1",
+  "sections" : [ {
+    "id" : 0,
+    "questions" : [ {
+      "@type" : "TextQuestion",
+      "id" : 0,
+      "questionText" : "What is your age?",
+      "answer" : {
+        "answer" : "22"
+      }
+    }, {
+      "@type" : "McQuestion",
+      "alternatives" : [ {
+        "id" : 1,
+        "alternativeText" : "Male"
+      }, {
+        "id" : 2,
+        "alternativeText" : "Female"
+      }, {
+        "id" : 3,
+        "alternativeText" : "Prefer not to say"
+      } ],
+      "id" : 1,
+      "questionText" : "What is your gender?",
+      "answer" : {
+        "answer" : "2"
+      }
+    }, {
+      "@type" : "MatrixQuestion",
+      "scale" : 7,
+      "id" : 2,
+      "questionText" : "How would you rate your English skill?",
+      "answer" : {
+        "answer" : "6"
+      }
+    } ]
+  }, {
+    "id" : 1,
+    "questions" : [ {
+      "@type" : "MatrixQuestion",
+      "scale" : 10,
+      "id" : 0,
+      "questionText" : "On a scale from 1 to 10, how would you rate this website design?",
+      "answer" : {
+        "answer" : "7"
+      }
+    }, {
+      "@type" : "TextQuestion",
+      "id" : 1,
+      "questionText" : "What is the highest degree or level of school you have received/completed?",
+      "answer" : {
+        "answer" : "bsc"
+      }
+    }, {
+      "@type" : "McQuestion",
+      "alternatives" : [ {
+        "id" : 1,
+        "alternativeText" : "<font color=\"blue\">Blue pill</font> - the story ends, you wake up in your bed and believe whatever you want to believe."
+      }, {
+        "id" : 2,
+        "alternativeText" : "<font color=\"red\">Red pill</font> - you stay in Wonderland, and I show you how deep the rabbit hole goes."
+      } ],
+      "id" : 2,
+      "questionText" : "Which pill do you choose?",
+      "answer" : {
+        "answer" : "1"
+      }
+    } ]
+  }, {
+    "id" : 2,
+    "questions" : [ {
+      "@type" : "EmbedQuestion",
+      "id" : 0,
+      "questionText" : "How does this content make you feel? (1 = very unhappy, 4 = neutral, 7 = very happy)",
+      "embedLink" : "<iframe id=\"forecast_embed\" frameborder=\"0\" height=\"245\" width=\"60%\"\n            src=\"//forecast.io/embed/#lat=53.4640067&amp;lon=-2.2243379&amp;name=Manchester&amp;units=uk&amp;color=#00aaff\"></iframe>",
+      "answer" : {
+        "answer" : "4"
+      },
+      "scale" : 7
+    }, {
+      "@type" : "TextQuestion",
+      "id" : 1,
+      "questionText" : "What's your favourite pizza topping?",
+      "answer" : {
+        "answer" : "pepperoni"
+      }
+    }, {
+      "@type" : "McQuestion",
+      "alternatives" : [ {
+        "id" : 1,
+        "alternativeText" : "Every day"
+      }, {
+        "id" : 2,
+        "alternativeText" : "Every week"
+      }, {
+        "id" : 3,
+        "alternativeText" : "Every month"
+      }, {
+        "id" : 4,
+        "alternativeText" : "Never"
+      } ],
+      "id" : 2,
+      "questionText" : "How often do you use twitter?",
+      "answer" : {
+        "answer" : "2"
+      }
+    }, {
+      "@type" : "McQuestion",
+      "alternatives" : [ {
+        "id" : 1,
+        "alternativeText" : "<font color=\"blue\">Leonardo</font>"
+      }, {
+        "id" : 2,
+        "alternativeText" : "<font color=\"red\">Raphael</font>"
+      }, {
+        "id" : 3,
+        "alternativeText" : "<font color=\"purple\">Donatello</font>"
+      }, {
+        "id" : 4,
+        "alternativeText" : "<font color=\"orange\">Michelangelo</font>"
+      } ],
+      "id" : 3,
+      "questionText" : "Who is your favourite Ninja Turtle?",
+      "answer" : {
+        "answer" : "3"
+      }
+    }, {
+      "@type" : "McQuestion",
+      "alternatives" : [ {
+        "id" : 1,
+        "alternativeText" : "Beatles"
+      }, {
+        "id" : 2,
+        "alternativeText" : "Queen"
+      } ],
+      "id" : 4,
+      "questionText" : "Beatles or Queen?",
+      "answer" : {
+        "answer" : "2"
+      }
+    }, {
+      "@type" : "McQuestion",
+      "alternatives" : [ {
+        "id" : 1,
+        "alternativeText" : "Apple"
+      }, {
+        "id" : 2,
+        "alternativeText" : "Samsung"
+      } ],
+      "id" : 5,
+      "questionText" : "Apple or Samsung?",
+      "answer" : {
+        "answer" : "1"
+      }
+    }, {
+      "@type" : "McQuestion",
+      "alternatives" : [ {
+        "id" : 1,
+        "alternativeText" : "PS4"
+      }, {
+        "id" : 2,
+        "alternativeText" : "Xbox One"
+      }, {
+        "id" : 3,
+        "alternativeText" : "Switch"
+      }, {
+        "id" : 4,
+        "alternativeText" : "PC"
+      }, {
+        "id" : 5,
+        "alternativeText" : "Wii"
+      } ],
+      "id" : 6,
+      "questionText" : "Which do you choose?",
+      "answer" : {
+        "answer" : "3"
+      }
+    } ]
+  } ]
+}

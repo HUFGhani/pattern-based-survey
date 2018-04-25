@@ -36,5 +36,7 @@ public class Survey {
 
     public void setAnswer(int sectionID, int questionID, Answer answer){
 
+        Section section = getSectionById(sectionID);
+        section.getQuestions().get(questionID).setAnswer(answer);
     }
 }
