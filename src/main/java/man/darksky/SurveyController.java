@@ -26,8 +26,8 @@ import java.util.Map;
 @Controller
 public class SurveyController {
 
-    SurveyFactory surveyFactory;
-    ConfigurationProperties configurationProperties;
+    private SurveyFactory surveyFactory;
+    private ConfigurationProperties configurationProperties;
 
     @Autowired
     public SurveyController (SurveyFactory surveyFactory, ConfigurationProperties configurationProperties){
@@ -57,13 +57,8 @@ public class SurveyController {
         HttpSession session = request.getSession();
         Survey survey = (Survey) session.getAttribute("survey");
         int currentSection = Integer.parseInt(params.get("sectionId"));
-        HashMap<Integer,String> answers = new HashMap<>();
 
-        survey.getSectionById(currentSection).getQuestions().stream().forEach(q->answers.put(q.getId(),params.get((Integer.toString(q.getId())))));
-        answers.forEach((id,answer)->survey.getSections()
-                        .get(currentSection)
-                        .getQuestionById(id)
-                        .setAnswer(new Answer(answer)));
+        survey.getSectionById(currentSection).getQuestions().forEach(q->survey.setAnswer(currentSection,q.getId(),new Answer(params.get((Integer.toString(q.getId()))))));
 
         if (!isEndOfSurvey(survey,currentSection)) {
             session.setAttribute("survey", survey);
@@ -71,6 +66,7 @@ public class SurveyController {
             model.addAttribute("questions", survey.getSectionById(currentSection + 1).getQuestions());
         }else{
             saveSurvey(survey,request);
+            session.invalidate();
             return showEndPage();
         }
 
