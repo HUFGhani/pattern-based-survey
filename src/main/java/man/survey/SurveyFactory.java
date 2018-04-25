@@ -38,13 +38,13 @@ public class SurveyFactory {
         if(survey==null){
             survey = getSurveyFromFile(surveyName);
 
-            EmbedQuestionStrategy adapter = Math.random() < 0.5 ?
+            EmbedQuestionStrategy strategy = Math.random() < 0.5 ?
                     new EmbedQuestionTwitterStrategy(twitter) : new EmbedQuestionWeatherStrategy(darkSkyApiService); // Get random embedded content
 
             for (Section s : survey.getSections()) // Invokes adapter to obtain a link for embedding Tweet/Weather content
                 for (Question q: s.getQuestions())
                     if (q instanceof EmbedQuestion)
-                        ((EmbedQuestion) q).setEmbedLink(adapter.getEmbedLink());
+                        ((EmbedQuestion) q).setEmbedLink(strategy.getEmbedLink());
 
             surveys.put(surveyName,survey);
         }
