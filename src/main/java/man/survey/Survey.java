@@ -33,4 +33,8 @@ public class Survey {
         }
         return null;
     }
+
+    public void setAnswer(int sectionID, int questionID, Answer answer){
+
+    }
 }
