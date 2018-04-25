@@ -1,0 +1,80 @@
+{
+  "name" : "survey1",
+  "sections" : [ {
+    "id" : 0,
+    "questions" : [ {
+      "@type" : "TextQuestion",
+      "id" : 0,
+      "questionText" : "What question?",
+      "answer" : {
+        "answer" : "dd"
+      }
+    }, {
+      "@type" : "McQuestion",
+      "alternatives" : [ {
+        "id" : 1,
+        "alternativeText" : "First alternative"
+      }, {
+        "id" : 2,
+        "alternativeText" : "Second alternative"
+      } ],
+      "id" : 1,
+      "questionText" : "Which alternative?",
+      "answer" : {
+        "answer" : "1"
+      }
+    }, {
+      "@type" : "MatrixQuestion",
+      "scale" : 7,
+      "id" : 2,
+      "questionText" : "How does this survey make you feel?",
+      "answer" : {
+        "answer" : "7"
+      }
+    } ]
+  }, {
+    "id" : 1,
+    "questions" : [ {
+      "@type" : "MatrixQuestion",
+      "scale" : 10,
+      "id" : 3,
+      "questionText" : "On a scale from 1 to 10, how would you rate your pain?",
+      "answer" : {
+        "answer" : "4"
+      }
+    }, {
+      "@type" : "TextQuestion",
+      "id" : 4,
+      "questionText" : "More questions?",
+      "answer" : {
+        "answer" : "d"
+      }
+    }, {
+      "@type" : "McQuestion",
+      "alternatives" : [ {
+        "id" : 1,
+        "alternativeText" : "<font color=\"blue\">Blue pill</font> - the story ends, you wake up in your bed and believe whatever you want to believe."
+      }, {
+        "id" : 2,
+        "alternativeText" : "<font color=\"red\">Red pill</font> - you stay in Wonderland, and I show you how deep the rabbit hole goes."
+      } ],
+      "id" : 6,
+      "questionText" : "Which pill do you choose?",
+      "answer" : {
+        "answer" : "1"
+      }
+    } ]
+  }, {
+    "id" : 2,
+    "questions" : [ {
+      "@type" : "EmbedQuestion",
+      "id" : 5,
+      "questionText" : "How does this content make you feel? (1 = very unhappy, 4 = neutral, 7 = very happy)",
+      "embedLink" : "<blockquote class=\"twitter-tweet\" align=\"center\" data-width=\"500\" data-lang=\"en\"><p lang=\"en\" dir=\"ltr\">The <a href=\"https://twitter.com/AuschwitzMuseum?ref_src=twsrc%5Etfw\">@AuschwitzMuseum</a> was officially created in 1947. Survivors from the beginning wished to create an institution of remembrance at the site of the former German Nazi camp. Learn here about the history of the Memorial: <a href=\"https://t.co/aCJh2wCNTb\">https://t.co/aCJh2wCNTb</a> <a href=\"https://twitter.com/hashtag/heritageMW?src=hash&amp;ref_src=twsrc%5Etfw\">#heritageMW</a> <a href=\"https://twitter.com/hashtag/MuseumWeek?src=hash&amp;ref_src=twsrc%5Etfw\">#MuseumWeek</a> <a href=\"https://t.co/KDAqWq9FwX\">pic.twitter.com/KDAqWq9FwX</a></p>&mdash; Auschwitz Memorial (@AuschwitzMuseum) <a href=\"https://twitter.com/AuschwitzMuseum/status/989040718386737153?ref_src=twsrc%5Etfw\">April 25, 2018</a></blockquote>\n<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>\n",
+      "answer" : {
+        "answer" : "1"
+      },
+      "scale" : 7
+    } ]
+  } ]
+}
