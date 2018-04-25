@@ -84,6 +84,11 @@
           "embedLink": ""
         },
         {
+          "@type": "TextQuestion",
+          "id": 6,
+          "questionText": "What's your favourite pizza topping?"
+        },
+        {
           "@type": "McQuestion",
           "alternatives": [
             {
@@ -105,6 +110,87 @@
           ],
           "id": 6,
           "questionText": "How often do you use twitter?"
+        },
+        {
+          "id": 7,
+          "@type": "McQuestion",
+          "questionText": "Who is your favourite Ninja Turtle?",
+          "alternatives": [
+            {
+              "id": 1,
+              "alternativeText": "<font color=\"blue\">Leonardo</font>"
+            },
+            {
+              "id": 2,
+              "alternativeText": "<font color=\"red\">Raphael</font>"
+            },
+            {
+              "id": 3,
+              "alternativeText": "<font color=\"purple\">Donatello</font>"
+            },
+            {
+              "id": 4,
+              "alternativeText": "<font color=\"orange\">Michelangelo</font>"
+            }
+          ]
+
+        },
+        {
+          "@type": "McQuestion",
+          "alternatives": [
+            {
+              "id": 1,
+              "alternativeText": "Beatles"
+            },
+            {
+              "id": 2,
+              "alternativeText": "Queen"
+            }
+          ],
+          "id": 8,
+          "questionText": "Beatles or Queen?"
+        },
+        {
+          "@type": "McQuestion",
+          "alternatives": [
+            {
+              "id": 1,
+              "alternativeText": "Apple"
+            },
+            {
+              "id": 2,
+              "alternativeText": "Samsung"
+            }
+          ],
+          "id": 9,
+          "questionText": "Apple or Samsung?"
+        },
+        {
+          "@type": "McQuestion",
+          "alternatives": [
+            {
+              "id": 1,
+              "alternativeText": "PS4"
+            },
+            {
+              "id": 2,
+              "alternativeText": "Xbox One"
+            },
+            {
+              "id": 3,
+              "alternativeText": "Switch"
+            },
+            {
+              "id": 4,
+              "alternativeText": "PC"
+            },
+            {
+              "id": 5,
+              "alternativeText": "Wii"
+            }
+          ],
+          "id": 10,
+          "questionText": "Which do you choose?"
         }
       ]
     }
