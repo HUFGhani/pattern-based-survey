@@ -7,34 +7,18 @@ import java.util.List;
  */
 public class CompositeQuestion extends Question {
     private List<Question> question;
+    private int id;
+    private String questionText;
+    private Answer answer;
 
     @Override
     public int getId() {
-        return 0;
+        return id;
     }
 
     @Override
     public void setId(int id) {
-
-    }
-
-    @Override
-    public String getQuestionText() {
-        return null;
-    }
-
-    @Override
-    public void setQuestionText(String questionText) {
-
-    }
-
-    @Override
-    public Answer getAnswer() {
-        return null;
-    }
-
-    @Override
-    public void setAnswer(Answer answer) {
+        this.id =id;
 
     }
 }

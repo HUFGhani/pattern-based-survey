@@ -23,22 +23,18 @@ public class TextQuestion extends Question {
         this.id=id;
     }
 
-    @Override
     public String getQuestionText() {
         return this.questionText;
     }
 
-    @Override
     public void setQuestionText(String questionText) {
         this.questionText=questionText;
     }
 
-    @Override
     public Answer getAnswer() {
         return this.answer;
     }
 
-    @Override
     public void setAnswer(Answer answer) {
         this.answer = answer;
     }

@@ -16,13 +16,13 @@ public abstract class Question {
 
     public abstract void setId(int id);
 
-    public abstract String getQuestionText();
+//    public abstract String getQuestionText();
 
-    public abstract void setQuestionText(String questionText);
+//    public abstract void setQuestionText(String questionText);
 
-    public abstract Answer getAnswer();
+//    public abstract Answer getAnswer();
 
-    public abstract void setAnswer(Answer answer);
+//    public abstract void setAnswer(Answer answer);
 
 
 }

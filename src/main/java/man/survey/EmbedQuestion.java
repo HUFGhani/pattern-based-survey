@@ -44,22 +44,18 @@ public class EmbedQuestion extends Question {
         this.id = id;
     }
 
-    @Override
     public String getQuestionText() {
         return questionText;
     }
 
-    @Override
     public void setQuestionText(String questionText) {
         this.questionText = questionText;
     }
 
-    @Override
     public Answer getAnswer() {
         return answer;
     }
 
-    @Override
     public void setAnswer(Answer answer) {
         this.answer = answer;
     }
