@@ -1,15 +1,14 @@
 package man.survey;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by swsmi on 2018/4/29.
  */
 public class CompositeQuestion extends Question {
-    private List<Question> question;
+    private List<Question> list;
     private int id;
-    private String questionText;
-    private Answer answer;
 
     @Override
     public int getId() {
@@ -19,6 +18,21 @@ public class CompositeQuestion extends Question {
     @Override
     public void setId(int id) {
         this.id =id;
+
+    }
+
+    @Override
+    public List<Question> getQuestions() {
+        return list;
+    }
+
+    @Override
+    public Answer getAnswer() {
+        return null;
+    }
+
+    @Override
+    public void setAnswer(Answer answer) {
 
     }
 }

@@ -14,8 +14,8 @@ public class Section {
 
     public Section() {}
 
-    public Question getQuestions() {
-        return question;
+    public List<Question> getQuestions() {
+        return question.getQuestions();
     }
 
     public void setQuestions(Question question) {

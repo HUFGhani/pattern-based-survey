@@ -15,7 +15,8 @@ public class Survey {
         this.name = name;
     }
 
-    public Survey(){}
+    public Survey() {
+    }
 
     public void setSections(List<Section> sections) {
         this.sections = sections;
@@ -25,18 +26,24 @@ public class Survey {
         return sections;
     }
 
-    public Section getSectionById(int id){
-        for(Section section : sections){
-            if(section.getId()==id){
+    public Section getSectionById(int id) {
+        for (Section section : sections) {
+            if (section.getId() == id) {
                 return section;
             }
         }
         return null;
     }
 
-    public void setAnswer(int sectionID, int questionID, Answer answer){
+    public void setAnswer(int sectionID, int questionID, Answer answer) {
 
         Section section = getSectionById(sectionID);
-        section.getQuestions().get(questionID).setAnswer(answer);
+        List<Question> list = section.getQuestions();
+        for (Question q : list) {
+            if (q.getId() == questionID){
+                q.setAnswer(answer);
+                break;
+            }
+        }
     }
 }

@@ -1,0 +1,13 @@
+{
+  "name": "survey1",
+  "sections": {
+    "id": 1,
+    "questions": {
+      "@type": "EmbedQuestion",
+      "id": 0,
+      "scale": 7,
+      "questionText": "How does this content make you feel? (1 = very unhappy, 4 = neutral, 7 = very happy)",
+      "embedLink": ""
+    }
+  }
+}

@@ -1,5 +1,8 @@
 package man.survey;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TextQuestion extends Question {
 
     private int id;
@@ -37,6 +40,14 @@ public class TextQuestion extends Question {
 
     public void setAnswer(Answer answer) {
         this.answer = answer;
+    }
+
+    @Override
+    public List<Question> getQuestions() {
+        List<Question> list = new ArrayList<Question>();
+        list.add(this);
+
+        return list;
     }
 
 }

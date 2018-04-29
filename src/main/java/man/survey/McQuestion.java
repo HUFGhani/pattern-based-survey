@@ -1,5 +1,6 @@
 package man.survey;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class McQuestion extends Question {
@@ -49,5 +50,13 @@ public class McQuestion extends Question {
 
     public void setAnswer(Answer answer) {
         this.answer = answer;
+    }
+
+    @Override
+    public List<Question> getQuestions() {
+        List<Question> list = new ArrayList<Question>();
+        list.add(this);
+
+        return list;
     }
 }
