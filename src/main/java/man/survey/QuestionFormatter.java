@@ -1,4 +1,9 @@
 package man.survey;
 
-public class QuestionFormatter {
+public interface QuestionFormatter {
+
+    void clearAnswer();
+
+    void setScale(int scale);
+
 }

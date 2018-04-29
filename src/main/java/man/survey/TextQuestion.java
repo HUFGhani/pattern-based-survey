@@ -43,4 +43,13 @@ public class TextQuestion extends Question {
         this.answer = answer;
     }
 
+    @Override
+    public void clearAnswer() {
+        this.answer = null;
+    }
+
+    @Override
+    public void setScale(int scale) {
+
+    }
 }

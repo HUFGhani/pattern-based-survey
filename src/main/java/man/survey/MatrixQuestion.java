@@ -19,10 +19,6 @@ public class MatrixQuestion extends Question{
         return scale;
     }
 
-    public void setScale(int scale) {
-        this.scale = scale;
-    }
-
     @Override
     public int getId() {
         return this.id;
@@ -53,5 +49,14 @@ public class MatrixQuestion extends Question{
         this.answer = answer;
     }
 
+    @Override
+    public void clearAnswer() {
+        this.answer = null;
+    }
+
+    @Override
+    public void setScale(int scale) {
+        this.scale = scale;
+    }
 
 }

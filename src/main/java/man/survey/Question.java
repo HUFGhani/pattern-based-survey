@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(value = TextQuestion.class, name = "TextQuestion"),
         @JsonSubTypes.Type(value = EmbedQuestion.class, name = "EmbedQuestion")}
 )
-public abstract class Question {
+public abstract class Question implements QuestionFormatter {
 
     public abstract int getId();
 

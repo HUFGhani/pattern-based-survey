@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import man.config.ConfigurationProperties;
 import man.survey.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.social.twitter.api.Twitter;
@@ -19,6 +21,7 @@ import savesurvery.SurveryWriterUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,7 +46,7 @@ public class SurveyController {
             surveyName=configurationProperties.getDefaultSurveyName();
         }
         Survey survey = surveyFactory.getSurvey(surveyName);
-
+        survey.clearAnswer();
         model.addAttribute("questions",survey.getSectionById(currentSection).getQuestions());
         model.addAttribute("sectionId",survey.getSectionById(currentSection).getId());
         request.getSession().setAttribute("survey",survey);
