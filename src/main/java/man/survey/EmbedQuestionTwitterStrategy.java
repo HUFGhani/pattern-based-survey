@@ -1,6 +1,6 @@
 package man.survey;
 
-import man.darksky.TwitterApiAdapter;
+import man.darksky.TwitterObjectApiAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.twitter.api.*;
 import org.springframework.stereotype.Service;
@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 public class EmbedQuestionTwitterStrategy implements EmbedQuestionStrategy {
 
     @Autowired
-    private TwitterApiAdapter twitterApiAdapter;
+    private TwitterObjectApiAdapter twitterApiAdapter;
 
-    public EmbedQuestionTwitterStrategy(TwitterApiAdapter twitterApiAdapter){
+    public EmbedQuestionTwitterStrategy(TwitterObjectApiAdapter twitterApiAdapter){
         this.twitterApiAdapter = twitterApiAdapter;
     }
 

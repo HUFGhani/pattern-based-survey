@@ -4,10 +4,9 @@ package man.survey;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import man.config.ConfigurationProperties;
 import man.darksky.DarkSkyApiAdapter;
-import man.darksky.TwitterApiAdapter;
+import man.darksky.TwitterObjectApiAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Singleton;
@@ -24,7 +23,7 @@ public class SurveyFactory {
     private DarkSkyApiAdapter darkSkyApiAdapter;
 
     @Autowired
-    private TwitterApiAdapter twitterApiAdapter;
+    private TwitterObjectApiAdapter twitterApiAdapter;
 
     public SurveyFactory(ConfigurationProperties configurationProperties){
         this.configurationProperties = configurationProperties;
@@ -50,7 +49,6 @@ public class SurveyFactory {
         }
         return survey;
     }
-
 
     private Survey getSurveyFromFile(String surveyName){
         Survey survey = null;
