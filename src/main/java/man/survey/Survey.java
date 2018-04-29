@@ -38,7 +38,7 @@ public class Survey {
     public void setAnswer(int sectionID, int questionID, Answer answer) {
 
         Section section = getSectionById(sectionID);
-        List<Question> list = section.getQuestions();
+        List<Question> list = section.getQ();
         for (Question q : list) {
             if (q.getId() == questionID){
                 q.setAnswer(answer);

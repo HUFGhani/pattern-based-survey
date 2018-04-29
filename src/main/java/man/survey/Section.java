@@ -5,21 +5,21 @@ import java.util.List;
 public class Section {
 
     private int id;
-    private Question question;
+    private Question questions;
 
     public Section(int id, Question question) {
         this.id = id;
-        this.question = question;
+        this.questions = question;
     }
 
     public Section() {}
 
-    public List<Question> getQuestions() {
-        return question.getQuestions();
+    public List<Question> getQ() {
+        return questions.getQuestions();
     }
 
     public void setQuestions(Question question) {
-        this.question = question;
+        this.questions = question;
     }
 
     public int getId() {

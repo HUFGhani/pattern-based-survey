@@ -44,7 +44,7 @@ public class SurveyController {
         }
         Survey survey = surveyFactory.getSurvey(surveyName);
 
-        model.addAttribute("questions",survey.getSectionById(currentSection).getQuestions());
+        model.addAttribute("questions",survey.getSectionById(currentSection).getQ());
         model.addAttribute("sectionId",survey.getSectionById(currentSection).getId());
         request.getSession().setAttribute("survey",survey);
         return "survey";
@@ -58,12 +58,12 @@ public class SurveyController {
         Survey survey = (Survey) session.getAttribute("survey");
         int currentSection = Integer.parseInt(params.get("sectionId"));
 
-        survey.getSectionById(currentSection).getQuestions().forEach(q->survey.setAnswer(currentSection,q.getId(),new Answer(params.get((Integer.toString(q.getId()))))));
+        survey.getSectionById(currentSection).getQ().forEach(q->survey.setAnswer(currentSection,q.getId(),new Answer(params.get((Integer.toString(q.getId()))))));
 
         if (!isEndOfSurvey(survey,currentSection)) {
             session.setAttribute("survey", survey);
             model.addAttribute("sectionId", currentSection + 1);
-            model.addAttribute("questions", survey.getSectionById(currentSection + 1).getQuestions());
+            model.addAttribute("questions", survey.getSectionById(currentSection + 1).getQ());
         }else{
             saveSurvey(survey,request);
             session.invalidate();

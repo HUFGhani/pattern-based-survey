@@ -38,7 +38,7 @@ public class SurveyFactoryTest  extends AbstractTestNGSpringContextTests{
 
         String emberdLinkStr;
         for (Section s : survey.getSections()) // Invokes adapter to obtain a link for embedding Tweet/Weather content
-            for (Question q: s.getQuestions())
+            for (Question q: s.getQ())
                 if (q instanceof EmbedQuestion) {
                     emberdLinkStr = ((EmbedQuestion) q).getEmbedLink();
                     assertTrue(emberdLinkStr.startsWith("<iframe id=\"forecast_embed\"") || emberdLinkStr.startsWith("<blockquote class=\"twitter-tweet\""));
