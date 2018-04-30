@@ -1,4 +1,4 @@
-# Epic Survey
+# Embedded Content Survey
 
 ## Prerequisites
 * Java JDK 1.8 or higher [download from here](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
