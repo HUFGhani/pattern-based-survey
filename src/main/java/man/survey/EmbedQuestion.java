@@ -22,6 +22,12 @@ public class EmbedQuestion extends Question {
         return scale;
     }
 
+    @Override
+    public void clearAnswer() {
+        this.answer=null;
+    }
+
+    @Override
     public void setScale(int scale) {
         this.scale = scale;
     }
