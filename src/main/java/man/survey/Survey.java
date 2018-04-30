@@ -2,7 +2,7 @@ package man.survey;
 
 import java.util.List;
 
-public class Survey {
+public class Survey implements QuestionFormatter {
 
     private String name;
     private List<Section> sections;
@@ -38,5 +38,15 @@ public class Survey {
 
         Section section = getSectionById(sectionID);
         section.getQuestions().get(questionID).setAnswer(answer);
+    }
+
+    @Override
+    public void clearAnswer() {
+        sections.forEach(Section::clearAnswer);
+    }
+
+    @Override
+    public void setScale(int scale) {
+        sections.forEach(s->s.setScale(scale));
     }
 }

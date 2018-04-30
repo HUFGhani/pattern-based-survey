@@ -1,0 +1,155 @@
+{
+  "name" : "survey1",
+  "sections" : [ {
+    "id" : 0,
+    "questions" : [ {
+      "@type" : "TextQuestion",
+      "id" : 0,
+      "questionText" : "What is your age?",
+      "answer" : null
+    }, {
+      "@type" : "McQuestion",
+      "alternatives" : [ {
+        "id" : 1,
+        "alternativeText" : "Male"
+      }, {
+        "id" : 2,
+        "alternativeText" : "Female"
+      }, {
+        "id" : 3,
+        "alternativeText" : "Prefer not to say"
+      } ],
+      "id" : 1,
+      "questionText" : "What is your gender?",
+      "answer" : null
+    }, {
+      "@type" : "MatrixQuestion",
+      "scale" : 7,
+      "id" : 2,
+      "questionText" : "How would you rate your English skill?",
+      "answer" : null
+    } ]
+  }, {
+    "id" : 1,
+    "questions" : [ {
+      "@type" : "MatrixQuestion",
+      "scale" : 10,
+      "id" : 3,
+      "questionText" : "On a scale from 1 to 10, how would you rate this website design?",
+      "answer" : null
+    }, {
+      "@type" : "TextQuestion",
+      "id" : 4,
+      "questionText" : "What is the highest degree or level of school you have received/completed?",
+      "answer" : null
+    }, {
+      "@type" : "McQuestion",
+      "alternatives" : [ {
+        "id" : 1,
+        "alternativeText" : "<font color=\"blue\">Blue pill</font> - the story ends, you wake up in your bed and believe whatever you want to believe."
+      }, {
+        "id" : 2,
+        "alternativeText" : "<font color=\"red\">Red pill</font> - you stay in Wonderland, and I show you how deep the rabbit hole goes."
+      } ],
+      "id" : 4,
+      "questionText" : "Which pill do you choose?",
+      "answer" : null
+    } ]
+  }, {
+    "id" : 2,
+    "questions" : [ {
+      "@type" : "EmbedQuestion",
+      "id" : 5,
+      "questionText" : "How does this content make you feel? (1 = very unhappy, 4 = neutral, 7 = very happy)",
+      "embedLink" : "<blockquote class=\"twitter-tweet\" align=\"center\" data-width=\"500\" data-lang=\"en\"><p lang=\"en\" dir=\"ltr\"><a href=\"https://twitter.com/hashtag/LFC?src=hash&amp;ref_src=twsrc%5Etfw\">#LFC</a> insist Zeljko Buvac has not quit as Klopp&#39;s No 2. But he will be absent for the rest of the season due to personal reasons. <a href=\"https://twitter.com/hashtag/LFC?src=hash&amp;ref_src=twsrc%5Etfw\">#LFC</a> <a href=\"https://twitter.com/hashtag/Buvac?src=hash&amp;ref_src=twsrc%5Etfw\">#Buvac</a></p>&mdash; James Pearce (@JamesPearceEcho) <a href=\"https://twitter.com/JamesPearceEcho/status/990863683038466048?ref_src=twsrc%5Etfw\">April 30, 2018</a></blockquote>\n<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>\n",
+      "answer" : null,
+      "scale" : 7
+    }, {
+      "@type" : "TextQuestion",
+      "id" : 6,
+      "questionText" : "What's your favourite pizza topping?",
+      "answer" : null
+    }, {
+      "@type" : "McQuestion",
+      "alternatives" : [ {
+        "id" : 1,
+        "alternativeText" : "Every day"
+      }, {
+        "id" : 2,
+        "alternativeText" : "Every month"
+      }, {
+        "id" : 3,
+        "alternativeText" : "Every week"
+      }, {
+        "id" : 4,
+        "alternativeText" : "Never"
+      } ],
+      "id" : 6,
+      "questionText" : "How often do you use twitter?",
+      "answer" : null
+    }, {
+      "@type" : "McQuestion",
+      "alternatives" : [ {
+        "id" : 1,
+        "alternativeText" : "<font color=\"blue\">Leonardo</font>"
+      }, {
+        "id" : 2,
+        "alternativeText" : "<font color=\"red\">Raphael</font>"
+      }, {
+        "id" : 3,
+        "alternativeText" : "<font color=\"purple\">Donatello</font>"
+      }, {
+        "id" : 4,
+        "alternativeText" : "<font color=\"orange\">Michelangelo</font>"
+      } ],
+      "id" : 7,
+      "questionText" : "Who is your favourite Ninja Turtle?",
+      "answer" : null
+    }, {
+      "@type" : "McQuestion",
+      "alternatives" : [ {
+        "id" : 1,
+        "alternativeText" : "Beatles"
+      }, {
+        "id" : 2,
+        "alternativeText" : "Queen"
+      } ],
+      "id" : 8,
+      "questionText" : "Beatles or Queen?",
+      "answer" : null
+    }, {
+      "@type" : "McQuestion",
+      "alternatives" : [ {
+        "id" : 1,
+        "alternativeText" : "Apple"
+      }, {
+        "id" : 2,
+        "alternativeText" : "Samsung"
+      } ],
+      "id" : 9,
+      "questionText" : "Apple or Samsung?",
+      "answer" : null
+    }, {
+      "@type" : "McQuestion",
+      "alternatives" : [ {
+        "id" : 1,
+        "alternativeText" : "PS4"
+      }, {
+        "id" : 2,
+        "alternativeText" : "Xbox One"
+      }, {
+        "id" : 3,
+        "alternativeText" : "Switch"
+      }, {
+        "id" : 4,
+        "alternativeText" : "PC"
+      }, {
+        "id" : 5,
+        "alternativeText" : "Wii"
+      } ],
+      "id" : 10,
+      "questionText" : "Which do you choose?",
+      "answer" : null
+    } ]
+  } ]
+}

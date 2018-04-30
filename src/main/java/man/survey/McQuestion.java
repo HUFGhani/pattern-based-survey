@@ -54,4 +54,14 @@ public class McQuestion extends Question {
     public void setAnswer(Answer answer) {
         this.answer = answer;
     }
+
+    @Override
+    public void clearAnswer() {
+        this.answer = null;
+    }
+
+    @Override
+    public void setScale(int scale) {
+
+    }
 }
